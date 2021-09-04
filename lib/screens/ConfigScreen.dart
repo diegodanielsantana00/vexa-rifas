@@ -3,6 +3,7 @@ import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/ConfigScreen.dart';
+import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 
 class ConfigScreen extends StatefulWidget {
@@ -37,7 +38,9 @@ class _ConfigScreenState extends State<ConfigScreen> {
       backgroundColor: Colors.brown[50],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          utils().navigatorToNoReturnNoAnimated(context, CreateRifaScreen());
+        },
         backgroundColor: Colors.white,
         child: Icon(
           Icons.add,
@@ -103,40 +106,58 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     child: Column(
                       children: [
                         Container(
-                          height: BuildWidgets().getSize(context).height * 0.15,
-                          width: BuildWidgets().getSize(context).width * 0.7,
-                          decoration: BoxDecoration(
-                            color: AplicativoCollor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              BuildWidgets().buildTextFont(context, 15, FontWeight.w500, "Rifas Ativas", Colors.white),
-                              BuildWidgets().buildTextFont(context, 28, FontWeight.w500, "12", Colors.white)
-                            ],
-                          ),
-                          SizedBox(
-                            child: Container(decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),),
-                            width: 4,
-                            height: BuildWidgets().getSize(context).height * 0.1,),
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-
-                            children: [
-                              BuildWidgets().buildTextFont(context, 15, FontWeight.w500, "Rifas Fecha.", Colors.white),
-                              BuildWidgets().buildTextFont(context, 28, FontWeight.w500, "28", Colors.white)
-                            ],
-                          ),
-
-                          ],)
-                        ),
+                            height:
+                                BuildWidgets().getSize(context).height * 0.15,
+                            width: BuildWidgets().getSize(context).width * 0.7,
+                            decoration: BoxDecoration(
+                              color: AplicativoCollor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BuildWidgets().buildTextFont(
+                                        context,
+                                        15,
+                                        FontWeight.w500,
+                                        "Rifas Ativas",
+                                        Colors.white),
+                                    BuildWidgets().buildTextFont(context, 28,
+                                        FontWeight.w500, "12", Colors.white)
+                                  ],
+                                ),
+                                SizedBox(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                  ),
+                                  width: 4,
+                                  height:
+                                      BuildWidgets().getSize(context).height *
+                                          0.1,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BuildWidgets().buildTextFont(
+                                        context,
+                                        15,
+                                        FontWeight.w500,
+                                        "Rifas Fecha.",
+                                        Colors.white),
+                                    BuildWidgets().buildTextFont(context, 28,
+                                        FontWeight.w500, "28", Colors.white)
+                                  ],
+                                ),
+                              ],
+                            )),
                         SizedBox(
                           height: 40,
                         ),

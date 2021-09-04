@@ -38,10 +38,10 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: Colors.white,
+        backgroundColor: AplicativoCollor,
         child: Icon(
           Icons.add,
-          color: Colors.black,
+          color: Colors.white,
         ),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -61,7 +61,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                 onPressed: () {},
                 icon: Icon(
                   Icons.settings,
-                  color: AplicativoCollor,
+                  color: Colors.black,
                 ))
           ],
         ),
@@ -69,7 +69,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
       body: Column(
         children: [
           Container(
-              height: BuildWidgets().getSize(context).height * 0.15,
+              height: BuildWidgets().getSize(context).height * 0.08,
               width: BuildWidgets().getSize(context).width,
               decoration: BoxDecoration(
                 color: AplicativoCollor,
@@ -88,74 +88,21 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BuildWidgets().buildTextFont(context, 12, FontWeight.w500,
-                      "ICONE DE PERFIL", Colors.white),
+                  BuildWidgets().buildTextFont(context, 20, FontWeight.w800,
+                      "Crie uma rifa", Colors.white),
                 ],
               )),
           Expanded(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                    width: BuildWidgets().getSize(context).width * 0.7,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: BuildWidgets().getSize(context).height * 0.15,
-                          width: BuildWidgets().getSize(context).width * 0.7,
-                          decoration: BoxDecoration(
-                            color: AplicativoCollor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              BuildWidgets().buildTextFont(context, 15, FontWeight.w500, "Rifas Ativas", Colors.white),
-                              BuildWidgets().buildTextFont(context, 28, FontWeight.w500, "12", Colors.white)
-                            ],
-                          ),
-                          SizedBox(
-                            child: Container(decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),),
-                            width: 4,
-                            height: BuildWidgets().getSize(context).height * 0.1,),
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-
-                            children: [
-                              BuildWidgets().buildTextFont(context, 15, FontWeight.w500, "Rifas Fecha.", Colors.white),
-                              BuildWidgets().buildTextFont(context, 28, FontWeight.w500, "28", Colors.white)
-                            ],
-                          ),
-
-                          ],)
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        BuildWidgets().buildTopicsConfig(
-                            context,
-                            "Minhas Compras",
-                            Icons.shop_2_outlined,
-                            Colors.black),
-                        BuildWidgets().buildTopicsConfig(context,
-                            "Minhas Vendas", Icons.money, Colors.black),
-                        BuildWidgets().buildTopicsConfig(context,
-                            "Config. de Conta", Icons.settings, Colors.black),
-                        BuildWidgets().buildTopicsConfig(
-                            context, "Sair da conta", Icons.logout, Colors.red),
-                      ],
-                    )),
-              ],
-            ),
-          )
+              child: Column(
+            children: [
+              SizedBox(height: BuildWidgets().getSize(context).height*0.03,),
+              Row(children: [
+                BuildWidgets().buildTextFont(context, 15, FontWeight.w500, "Nome da rifa", Colors.black),
+              ],),
+              BuildWidgets().buildTextFont(
+                  context, 20, FontWeight.w800, "Crie uma rifa", Colors.black),
+            ],
+          ))
         ],
       ),
     );
