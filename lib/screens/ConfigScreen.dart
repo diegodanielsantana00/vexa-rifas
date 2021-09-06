@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
-import 'package:vexa_rifas/screens/ConfigScreen.dart';
 import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 

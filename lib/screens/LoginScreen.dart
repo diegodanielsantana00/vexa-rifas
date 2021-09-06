@@ -77,6 +77,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   } catch (e) {
                     dynamic boolEmailVerification = await RegisterController().getUserFireBase(validationBD["idToken"]);
+                    print("boolEmailVerification" + boolEmailVerification.toString());
+                    print("validationBD" + validationBD.toString());
                      if (boolEmailVerification["users"][0]["emailVerified"] == false) {
                       await RegisterController().verifyEmailFireBaseUser(validationBD["idToken"]);
                         Navigator.of(context).pushAndRemoveUntil(
