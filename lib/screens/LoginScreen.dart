@@ -52,16 +52,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         image: AssetImage('assets/png/MulherDeNegocios.png'))),
               ),
               BuildWidgets().buildTextField(
-                  size,
                   "Email",
                   false,
                   Icons.email_outlined,
                   context,
                   0.7,
                   _emailController,
-                  Colors.transparent),
-              BuildWidgets().buildTextField(size, "Senha", true, Icons.password,
-                  context, 0.7, _passwordController, Colors.transparent),
+                  Colors.transparent,5),
+              BuildWidgets().buildTextField("Senha", true, Icons.password,
+                  context, 0.7, _passwordController, Colors.transparent,5),
               BuildWidgets().buildButton(context, size, "Entrar", () async{
                 awaitValidation = true;
                 // ignore: invalid_use_of_protected_member

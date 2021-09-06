@@ -58,7 +58,9 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                   color: Colors.black,
                 )),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  utils().navigatorToNoReturnNoAnimated(context, ConfigScreen());
+                },
                 icon: Icon(
                   Icons.settings,
                   color: Colors.black,

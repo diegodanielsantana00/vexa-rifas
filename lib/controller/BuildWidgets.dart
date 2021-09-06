@@ -24,12 +24,12 @@ class BuildWidgets {
     );
   }
 
-  Widget buildTextField(dynamic size, String type, bool obscure, dynamic icon,
-      dynamic context, double width, dynamic controller, dynamic colorBorder) {
+  Widget buildTextField(String type, bool obscure, dynamic icon,
+      dynamic context, double width, dynamic controller, dynamic colorBorder, double heigth) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: size.width * width,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: heigth),
+      width: getSize(context).width * width,
       decoration: BoxDecoration(
         color: AplicativoCollor50,
         borderRadius: BorderRadius.circular(8),
@@ -62,12 +62,12 @@ class BuildWidgets {
     );
   }
 
-  Widget buildTextFieldNoIcon(dynamic size, String type, bool obscure,
+  Widget buildTextFieldNoIcon(String type, bool obscure,
       dynamic context, double width, dynamic controller, dynamic colorBorder) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: size.width * width,
+      width: getSize(context).width * width,
       decoration: BoxDecoration(
         color: AplicativoCollor50,
         borderRadius: BorderRadius.circular(8),
@@ -126,14 +126,14 @@ class BuildWidgets {
   }
 
   buildTextFont(dynamic context, double _fontSize, dynamic _fontWeight,
-      String text, dynamic Color) {
+      String text, dynamic colorFont) {
     return Text(
       text,
       style: GoogleFonts.inter(
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: _fontSize,
           fontWeight: _fontWeight,
-          color: Color
+          color: colorFont
           // fontStyle: FontStyle.italic,
           ),
     );

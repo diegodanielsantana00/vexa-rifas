@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _searchontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                BuildWidgets().buildTextFont(context, 12, FontWeight.w500, "Olá, Diego Daniel", Colors.white),
+                BuildWidgets().buildTextFont(context, 22, FontWeight.w600, "Olá, Diego Daniel", Colors.white),
+                BuildWidgets().buildTextField("Pesquise aqui", false, Icons.search_outlined, context, 0.7, _searchontroller, Colors.transparent,2)
               ],)
             ),
             Expanded(child: new ListView.builder(

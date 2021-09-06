@@ -62,44 +62,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BuildWidgets().buildTextFieldNoIcon(size, "Nome", false,
+                  BuildWidgets().buildTextFieldNoIcon( "Nome", false,
                       context, 0.33, _firstnameController, Colors.transparent),
                   SizedBox(
                     width: size.width * 0.04,
                   ),
-                  BuildWidgets().buildTextFieldNoIcon(size, "Sobrenome", false,
+                  BuildWidgets().buildTextFieldNoIcon( "Sobrenome", false,
                       context, 0.33, _lastnameController, Colors.transparent),
                 ],
               ),
               BuildWidgets().buildTextField(
-                  size,
                   "Número",
                   false,
                   Icons.smartphone,
                   context,
                   0.7,
                   _numberController,
-                  Colors.transparent),
+                  Colors.transparent,5),
               BuildWidgets().buildTextField(
-                  size,
                   "Email",
                   false,
                   Icons.email,
                   context,
                   0.7,
                   _emailController,
-                  emailValidate(_emailController.text, context)),
+                  emailValidate(_emailController.text, context), 5),
               // emailValidate(_emailController.text, context),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BuildWidgets().buildTextFieldNoIcon(size, "Senha", true,
+                  BuildWidgets().buildTextFieldNoIcon( "Senha", true,
                       context, 0.33, _passwordController, Colors.transparent),
                   SizedBox(
                     width: size.width * 0.04,
                   ),
                   BuildWidgets().buildTextFieldNoIcon(
-                      size,
+                      
                       "Confirmar Senha",
                       true,
                       context,
