@@ -85,9 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialPageRoute(builder: (context) => ValidationScreen(validationBD["idToken"], validationBD["email"])),
                         (Route<dynamic> route) => false);
                      } else {
-                       Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                        (Route<dynamic> route) => false);
+                       utils().navigatorToNoReturn(context, HomeScreen());
                      }
                     
                   }

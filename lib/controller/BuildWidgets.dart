@@ -24,8 +24,15 @@ class BuildWidgets {
     );
   }
 
-  Widget buildTextField(String type, bool obscure, dynamic icon,
-      dynamic context, double width, dynamic controller, dynamic colorBorder, double heigth) {
+  Widget buildTextField(
+      String type,
+      bool obscure,
+      dynamic icon,
+      dynamic context,
+      double width,
+      dynamic controller,
+      dynamic colorBorder,
+      double heigth) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: heigth),
@@ -62,8 +69,8 @@ class BuildWidgets {
     );
   }
 
-  Widget buildTextFieldNoIcon(String type, bool obscure,
-      dynamic context, double width, dynamic controller, dynamic colorBorder) {
+  Widget buildTextFieldNoIcon(String type, bool obscure, dynamic context,
+      double width, dynamic controller, dynamic colorBorder) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -139,18 +146,19 @@ class BuildWidgets {
     );
   }
 
-  Widget buildRifasShop(dynamic context, String name, int idempresa) {
+  Widget buildRifasShop(dynamic context, String name, dynamic priceRifas, String url) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: getSize(context).width * 0.3,
-            width: getSize(context).width * 0.3,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(28),
-                color: Colors.red[300]),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.network(
+              url,
+              height: getSize(context).width*0.3,
+              width: getSize(context).width*0.3,
+            ),
           ),
           Container(
             height: getSize(context).width * 0.2,
@@ -165,13 +173,12 @@ class BuildWidgets {
                 SizedBox(
                   height: 6,
                 ),
-                buildTextFont(context, 17, FontWeight.w500, "Rifa de um PS4",
-                    Colors.black),
+                buildTextFont(context, 17, FontWeight.w500, name, Colors.black),
                 SizedBox(
                   height: 6,
                 ),
                 buildTextFont(context, 12, FontWeight.w500,
-                    "Valor da rifa: R\$50,00", Colors.black),
+                    "Valor da rifa: R\$$priceRifas", Colors.black),
                 SizedBox(
                   height: 2,
                 ),
@@ -218,7 +225,7 @@ class BuildWidgets {
     }
   }
 
-  Widget buildTopicsConfig(context, String type, icon, Color color ) {
+  Widget buildTopicsConfig(context, String type, icon, Color color) {
     return Column(
       children: [
         Row(
@@ -230,8 +237,8 @@ class BuildWidgets {
                 SizedBox(
                   width: 8,
                 ),
-                BuildWidgets().buildTextFont(
-                    context, 18, FontWeight.w400, type, color)
+                BuildWidgets()
+                    .buildTextFont(context, 18, FontWeight.w400, type, color)
               ],
             ),
             Icon(Icons.arrow_right_outlined, size: 25)

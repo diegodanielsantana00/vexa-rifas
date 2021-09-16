@@ -12,6 +12,7 @@ Color AplicativoCollor600 = HexColor("#3d2f00");
 
 
 //HTTPS LINKS
+const APIRealTime = "https://vexa-rifas-default-rtdb.firebaseio.com/";
 const APIKey = "AIzaSyCQUZ_lYfrK0wSVaEZDXycoCK3r5jXi6yk";
 const RegisterLink = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$APIKey";
 const LoginLink = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$APIKey";
