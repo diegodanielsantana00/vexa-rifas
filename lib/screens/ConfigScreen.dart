@@ -38,7 +38,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          utils().navigatorToNoReturnNoAnimated(context, CreateRifaScreen());
+          Utils().navigatorToNoReturnNoAnimated(context, CreateRifaScreen());
         },
         backgroundColor: Colors.white,
         child: Icon(
@@ -53,7 +53,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
           children: [
             IconButton(
                 onPressed: () {
-                  utils().navigatorToNoReturnNoAnimated(context, HomeScreen());
+                  Utils().navigatorToNoReturnNoAnimated(context, HomeScreen());
                 },
                 icon: Icon(
                   Icons.home,

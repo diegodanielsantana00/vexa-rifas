@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    refresh() => setState(() {});
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (validationBD["error"]["code"] == 400) {
                           awaitValidation = false;
                           _passwordController.text = "";
-                          (context as Element).reassemble();
+                          refresh();
                           AlertsDialogValidate().erroAlert(context, 'Usuário ou senha inválido.');
                         }
                       } catch (e) {
@@ -84,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialPageRoute(builder: (context) => ValidationScreen(validationBD["idToken"], validationBD["email"])),
                             (Route<dynamic> route) => false);
                          } else {
-                           utils().navigatorToNoReturn(context, HomeScreen());
+                           Utils().navigatorToNoReturn(context, HomeScreen());
                          }
                         
                       }
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   BuildWidgets().buildButton(context, size, "Criar uma conta", () {
-                    utils().navigatorToReturn(context, RegisterScreen());
+                    Utils().navigatorToReturn(context, RegisterScreen());
                   }, false),
                 ],
               ),

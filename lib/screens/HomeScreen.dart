@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
@@ -43,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          utils().navigatorToNoReturnNoAnimated(context, CreateRifaScreen());
+          Utils().navigatorToNoReturnNoAnimated(context, CreateRifaScreen());
         },
         backgroundColor: Colors.white,
         child: Icon(
@@ -64,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 )),
             IconButton(
                 onPressed: () {
-                  utils()
+                  Utils()
                       .navigatorToNoReturnNoAnimated(context, ConfigScreen());
                 },
                 icon: Icon(

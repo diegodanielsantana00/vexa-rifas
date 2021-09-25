@@ -4,7 +4,7 @@ import 'dart:convert';
 
 class RegisterController {
   registerFireBaseUser(String email, String password, String firstName,
-      String lastname, String Number) async {
+      String lastname, String number) async {
     http.Response response = await http.post(Uri.parse(RegisterLink),
         body: json.encode({
           "email": email,
@@ -13,7 +13,7 @@ class RegisterController {
           "firstName": firstName,
           "lastName": lastname,
           "fullName": "$firstName $lastname",
-          "federatedId": Number
+          "federatedId": number
         }));
     return json.decode(response.body);
   }

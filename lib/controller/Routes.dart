@@ -22,7 +22,7 @@ const getUserlINK = "https://identitytoolkit.googleapis.com/v1/accounts:lookup?k
 
 //MENSSAGER
 
-class menssagerApp{
+class MessageApp{
   String emailInvalid = "Seu email está inválido";
   String emailInvalidQuestion = "Por favor coloque um email válido";
   String passwordCheck = "A sua senha deve ter pelo menos 6 dígitos";

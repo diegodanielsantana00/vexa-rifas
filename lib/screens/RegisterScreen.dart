@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,7 +5,6 @@ import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/Validate.dart';
-import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/ValidationScrenn.dart';
 
 bool awaitValidation = false;
@@ -29,6 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    refresh() => setState(() {});
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -109,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   ),
                   BuildWidgets().buildTextFont(context, 12, FontWeight.w200,
-                      menssagerApp().passwordCheck, Colors.white),
+                      MessageApp().passwordCheck, Colors.white),
                   SizedBox(
                     height: size.height * 0.04,
                   ),
@@ -141,7 +139,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (validationBD["error"]["code"] == 400) {
                           AlertsDialogValidate().erroAlert(context,'Email já cadastrado.');
                           awaitValidation = false;
-                          (context as Element).reassemble();
+                          refresh();
+                          
                         }
                       } catch (e) {
                         await RegisterController().verifyEmailFireBaseUser(validationBD["idToken"]);
@@ -150,10 +149,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             (Route<dynamic> route) => false);
                       }
                       awaitValidation = false;
-                      (context as Element).reassemble();
+                      refresh();
                     }
                     awaitValidation = false;
-                    (context as Element).reassemble();
+                    refresh();
                   }, awaitValidation),
                 ],
               ),

@@ -9,7 +9,6 @@ import 'package:vexa_rifas/screens/HomeScreen.dart';
 
 int timeSend = 70;
 int timeReference = 1;
-bool validation = true;
 bool awaitValidation = false;
 
 
@@ -38,6 +37,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    refresh() => setState(() {});
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: AplicativoCollor,
@@ -60,7 +60,6 @@ class _ValidationScreenState extends State<ValidationScreen> {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              BuildWidgets().buildErro(context, size, validation, "Email ainda não verificado."),
               Container(
                 width: size.width * 0.8,
                 child: Column(
@@ -89,13 +88,12 @@ class _ValidationScreenState extends State<ValidationScreen> {
               BuildWidgets()
                   .buildButton(context, size, "Já confirmei meu email", () async{
                     awaitValidation = true;
-                   (context as Element).reassemble();
+                   refresh();
                     dynamic boolEmailVerification = await RegisterController().getUserFireBase(widget.idToken);
                      if (boolEmailVerification["users"][0]["emailVerified"] == false) {
-                      Timer(Duration(seconds: 3), () {validation = true;(context as Element).reassemble();});
-                      validation = false;
+                      AlertsDialogValidate().erroAlert(context, 'Email não validado, Por favor valide');
                       awaitValidation = false;
-                      (context as Element).reassemble();
+                      refresh();
                      } else {
                        Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => HomeScreen()),

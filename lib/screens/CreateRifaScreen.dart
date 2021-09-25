@@ -51,7 +51,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
           children: [
             IconButton(
                 onPressed: () {
-                  utils().navigatorToNoReturnNoAnimated(context, HomeScreen());
+                  Utils().navigatorToNoReturnNoAnimated(context, HomeScreen());
                 },
                 icon: Icon(
                   Icons.home,
@@ -59,7 +59,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                 )),
             IconButton(
                 onPressed: () {
-                  utils().navigatorToNoReturnNoAnimated(context, ConfigScreen());
+                  Utils().navigatorToNoReturnNoAnimated(context, ConfigScreen());
                 },
                 icon: Icon(
                   Icons.settings,

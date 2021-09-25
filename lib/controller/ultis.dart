@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class utils {
+class Utils {
   navigatorToNoReturn(context, dynamic screen) {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => screen),
