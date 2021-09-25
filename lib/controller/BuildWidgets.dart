@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
@@ -146,7 +147,8 @@ class BuildWidgets {
     );
   }
 
-  Widget buildRifasShop(dynamic context, String name, dynamic priceRifas, String url) {
+  Widget buildRifasShop(
+      dynamic context, String name, dynamic priceRifas, String url) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Row(
@@ -155,9 +157,9 @@ class BuildWidgets {
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: Image.network(
-              url,
-              height: getSize(context).width*0.3,
-              width: getSize(context).width*0.3,
+              'https://www.google.com/url?sa=i&url=https%3A%2F%2Fagenciamoll.com.br%2Fo-que-e-url-e-como-ela-ajuda-na-sua-estrategia-digital%2F&psig=AOvVaw2bLUUvOasxiUmU3zXUv075&ust=1632496389724000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjFq42xlfMCFQAAAAAdAAAAABAD',
+              height: getSize(context).width * 0.3,
+              width: getSize(context).width * 0.3,
             ),
           ),
           Container(
@@ -250,5 +252,23 @@ class BuildWidgets {
         Divider(),
       ],
     );
+  }
+}
+
+class AlertsDialogValidate {
+  erroAlert(dynamic context, String errorText) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.ERROR,
+      animType: AnimType.SCALE,
+      headerAnimationLoop: false,
+      title: 'Ops...',
+      desc: errorText,
+      btnOkOnPress: () {},
+      // btnOkIcon: Icons.cancel,
+      btnOkColor: Colors.red[700],
+      autoHide: Duration(seconds: 5),
+      btnOkText: 'Fechar',
+    )..show();
   }
 }

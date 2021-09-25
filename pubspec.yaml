@@ -28,6 +28,7 @@ dependencies:
   google_fonts: ^2.1.0
   path_provider: ^2.0.2
   http: ^0.13.3
+  awesome_dialog: ^2.1.1
 
 
 
