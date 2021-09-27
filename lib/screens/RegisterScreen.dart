@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/Validate.dart';
+import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/ValidationScrenn.dart';
 
 bool awaitValidation = false;
@@ -33,7 +33,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Scaffold(
           backgroundColor: AplicativoCollor,
           appBar: AppBar(
-            leading: Icon(Icons.arrow_back_outlined),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Utils().navigatorBack(context),
+            ),
             backgroundColor: AplicativoCollor,
             shadowColor: Colors.transparent,
             title: Container(
@@ -61,13 +64,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      BuildWidgets().buildTextFieldNoIcon( "Nome", false,
-                          context, 0.33, _firstnameController, Colors.transparent),
+                      BuildWidgets().buildTextFieldNoIcon(
+                          "Nome",
+                          false,
+                          context,
+                          0.33,
+                          _firstnameController,
+                          Colors.transparent),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
-                      BuildWidgets().buildTextFieldNoIcon( "Sobrenome", false,
-                          context, 0.33, _lastnameController, Colors.transparent),
+                      BuildWidgets().buildTextFieldNoIcon(
+                          "Sobrenome",
+                          false,
+                          context,
+                          0.33,
+                          _lastnameController,
+                          Colors.transparent),
                     ],
                   ),
                   BuildWidgets().buildTextField(
@@ -77,7 +90,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       context,
                       0.7,
                       _numberController,
-                      Colors.transparent,5),
+                      Colors.transparent,
+                      5),
                   BuildWidgets().buildTextField(
                       "Email",
                       false,
@@ -85,18 +99,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       context,
                       0.7,
                       _emailController,
-                      emailValidate(_emailController.text, context), 5),
+                      emailValidate(_emailController.text, context),
+                      5),
                   // emailValidate(_emailController.text, context),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      BuildWidgets().buildTextFieldNoIcon( "Senha", true,
-                          context, 0.33, _passwordController, Colors.transparent),
+                      BuildWidgets().buildTextFieldNoIcon(
+                          "Senha",
+                          true,
+                          context,
+                          0.33,
+                          _passwordController,
+                          Colors.transparent),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
                       BuildWidgets().buildTextFieldNoIcon(
-                          
                           "Confirmar Senha",
                           true,
                           context,
@@ -117,13 +136,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  BuildWidgets().buildButton(context, size, "Proximo", () async {
-                    dynamic emailValidated = emailValidate(_emailController.text, context);
+                  BuildWidgets().buildButton(context, size, "Proximo",
+                      () async {
+                    dynamic emailValidated =
+                        emailValidate(_emailController.text, context);
                     dynamic password2Validated = passwordValidate(
                         _passwordController.text,
                         _passwordConfirmController.text,
                         context);
-            
+
                     if (emailValidated == Colors.transparent &&
                         _emailController.text != "" &&
                         password2Validated == Colors.transparent &&
@@ -137,15 +158,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               _numberController.text);
                       try {
                         if (validationBD["error"]["code"] == 400) {
-                          AlertsDialogValidate().erroAlert(context,'Email já cadastrado.');
+                          AlertsDialogValidate()
+                              .erroAlert(context, 'Email já cadastrado.');
                           awaitValidation = false;
                           refresh();
-                          
                         }
                       } catch (e) {
-                        await RegisterController().verifyEmailFireBaseUser(validationBD["idToken"]);
+                        await RegisterController()
+                            .verifyEmailFireBaseUser(validationBD["idToken"]);
                         Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) => ValidationScreen(validationBD["idToken"], _emailController.text)),
+                            MaterialPageRoute(
+                                builder: (context) => ValidationScreen(
+                                    validationBD["idToken"],
+                                    _emailController.text)),
                             (Route<dynamic> route) => false);
                       }
                       awaitValidation = false;

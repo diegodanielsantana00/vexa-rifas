@@ -16,11 +16,15 @@ class Utils {
 
   navigatorToNoReturnNoAnimated(context, dynamic screen) {
     Navigator.pushReplacement(
-      context, 
+      context,
       PageRouteBuilder(
         pageBuilder: (context, animation1, animation2) => screen,
         transitionDuration: Duration.zero,
-    ),
-);
+      ),
+    );
+  }
+
+  navigatorBack(context) {
+    Navigator.of(context).pop();
   }
 }

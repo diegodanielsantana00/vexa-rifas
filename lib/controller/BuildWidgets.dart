@@ -151,45 +151,53 @@ class BuildWidgets {
       dynamic context, String name, dynamic priceRifas, String url) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-              'https://www.google.com/url?sa=i&url=https%3A%2F%2Fagenciamoll.com.br%2Fo-que-e-url-e-como-ela-ajuda-na-sua-estrategia-digital%2F&psig=AOvVaw2bLUUvOasxiUmU3zXUv075&ust=1632496389724000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjFq42xlfMCFQAAAAAdAAAAABAD',
-              height: getSize(context).width * 0.3,
-              width: getSize(context).width * 0.3,
+      child: GestureDetector(
+        onTap: (){
+          print("Entrou tela");
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Container(
+                    color: Colors.grey[300],
+                    height: getSize(context).width * 0.3,
+                    width: getSize(context).width * 0.3,
+                    child: Image.network(
+                      'https://picsum.photos/250?image=9',
+                      height: getSize(context).width * 0.3,
+                      width: getSize(context).width * 0.3,
+                    ))),
+            Container(
+              height: getSize(context).width * 0.2,
+              width: getSize(context).width * 0.5,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  color: Colors.grey[300]),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 6,
+                  ),
+                  buildTextFont(context, 17, FontWeight.w500, name, Colors.black),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  buildTextFont(context, 12, FontWeight.w500,
+                      "Valor da rifa: R\$$priceRifas", Colors.black),
+                  SizedBox(
+                    height: 2,
+                  ),
+                  buildTextFont(
+                      context, 17, FontWeight.w500, "(BARRA)54%", Colors.black)
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: getSize(context).width * 0.2,
-            width: getSize(context).width * 0.5,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                color: Colors.grey[300]),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 6,
-                ),
-                buildTextFont(context, 17, FontWeight.w500, name, Colors.black),
-                SizedBox(
-                  height: 6,
-                ),
-                buildTextFont(context, 12, FontWeight.w500,
-                    "Valor da rifa: R\$$priceRifas", Colors.black),
-                SizedBox(
-                  height: 2,
-                ),
-                buildTextFont(
-                    context, 17, FontWeight.w500, "(BARRA)54%", Colors.black)
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

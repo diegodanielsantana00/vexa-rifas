@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
+import 'package:vexa_rifas/controller/DataLocal.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/RegisterScreen.dart';
 import 'package:vexa_rifas/screens/ValidationScrenn.dart';
+
+List dadosLocal = [];
 
 bool awaitValidation = false;
 
@@ -78,13 +81,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       } catch (e) {
                         dynamic boolEmailVerification = await RegisterController().getUserFireBase(validationBD["idToken"]);
                         print("boolEmailVerification" + boolEmailVerification.toString());
-                        print("validationBD" + validationBD.toString());
                          if (boolEmailVerification["users"][0]["emailVerified"] == false) {
                           await RegisterController().verifyEmailFireBaseUser(validationBD["idToken"]);
                             Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(builder: (context) => ValidationScreen(validationBD["idToken"], validationBD["email"])),
                             (Route<dynamic> route) => false);
                          } else {
+                           dadosLocal = DataLocal().addDadosList(validationBD["email"], validationBD["idToken"], dadosLocal, context);
+                           DataLocal().saveData(dadosLocal);
                            Utils().navigatorToNoReturn(context, HomeScreen());
                          }
                         

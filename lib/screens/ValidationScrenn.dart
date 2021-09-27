@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
+import 'package:vexa_rifas/controller/DataLocal.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
+
+List dadosLocal = [];
 
 int timeSend = 70;
 int timeReference = 1;
@@ -95,6 +98,8 @@ class _ValidationScreenState extends State<ValidationScreen> {
                       awaitValidation = false;
                       refresh();
                      } else {
+                       dadosLocal = DataLocal().addDadosList(boolEmailVerification["email"], widget.idToken, dadosLocal, context);
+                       DataLocal().saveData(dadosLocal);
                        Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                         (Route<dynamic> route) => false);
