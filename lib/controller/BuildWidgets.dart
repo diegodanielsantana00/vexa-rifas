@@ -2,17 +2,19 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
+import 'package:vexa_rifas/controller/ultis.dart';
+import 'package:vexa_rifas/screens/RifasScreen.dart';
 
 class BuildWidgets {
   Size getSize(context) {
     return MediaQuery.of(context).size;
   }
 
-  buildButton(BuildContext context, dynamic size, String text, dynamic ontap,
+  buildButton(BuildContext context, String text, dynamic ontap,
       bool awaitValidation) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      width: size.width * 0.6,
+      width: getSize(context).width * 0.6,
       // ignore: deprecated_member_use
       child: FlatButton(
           shape: new RoundedRectangleBorder(
@@ -21,7 +23,7 @@ class BuildWidgets {
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
           color: AplicativoCollor600,
           onPressed: ontap,
-          child: buildAwaitValidation(size, awaitValidation, text)),
+          child: buildAwaitValidation(awaitValidation, text, context)),
     );
   }
 
@@ -33,10 +35,10 @@ class BuildWidgets {
       double width,
       dynamic controller,
       dynamic colorBorder,
-      double heigth) {
+      double verticalHeigth) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: heigth),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalHeigth),
       width: getSize(context).width * width,
       decoration: BoxDecoration(
         color: AplicativoCollor50,
@@ -71,10 +73,10 @@ class BuildWidgets {
   }
 
   Widget buildTextFieldNoIcon(String type, bool obscure, dynamic context,
-      double width, dynamic controller, dynamic colorBorder) {
+      double width, dynamic controller, dynamic colorBorder, double verticalHeight) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalHeight),
       width: getSize(context).width * width,
       decoration: BoxDecoration(
         color: AplicativoCollor50,
@@ -153,7 +155,7 @@ class BuildWidgets {
       padding: const EdgeInsets.only(top: 15),
       child: GestureDetector(
         onTap: (){
-          print("Entrou tela");
+          Utils().navigatorToReturn(context, RifasScreen(name));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -218,7 +220,7 @@ class BuildWidgets {
     }
   }
 
-  Widget buildAwaitValidation(size, awaitValidation, text) {
+  Widget buildAwaitValidation(awaitValidation, text, context) {
     if (awaitValidation == false) {
       return Text(
         text,
@@ -226,8 +228,8 @@ class BuildWidgets {
       );
     } else {
       return Container(
-        height: size.width * 0.04,
-        width: size.width * 0.04,
+        height: getSize(context).width * 0.04,
+        width: getSize(context).width * 0.04,
         child: CircularProgressIndicator(
           color: Colors.white,
         ),

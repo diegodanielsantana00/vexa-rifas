@@ -89,7 +89,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                 ),
               ),
               BuildWidgets()
-                  .buildButton(context, size, "Já confirmei meu email", () async{
+                  .buildButton(context, "Já confirmei meu email", () async{
                     awaitValidation = true;
                    refresh();
                     dynamic boolEmailVerification = await RegisterController().getUserFireBase(widget.idToken);

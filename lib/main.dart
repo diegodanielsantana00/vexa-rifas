@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vexa_rifas/screens/StartScreen.dart';
+import 'package:vexa_rifas/screens/LoginScreen.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: StartScreen(),
+    home: LoginScreen(),
   ));
 }

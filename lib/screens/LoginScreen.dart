@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Colors.transparent,5),
                   BuildWidgets().buildTextField("Senha", true, Icons.password,
                       context, 0.7, _passwordController, Colors.transparent,5),
-                  BuildWidgets().buildButton(context, size, "Entrar", () async{
+                  BuildWidgets().buildButton(context, "Entrar", () async{
                     awaitValidation = true;
                     // ignore: invalid_use_of_protected_member
                     (context as Element).reassemble();
@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  BuildWidgets().buildButton(context, size, "Criar uma conta", () {
+                  BuildWidgets().buildButton(context, "Criar uma conta", () {
                     Utils().navigatorToReturn(context, RegisterScreen());
                   }, false),
                 ],

@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context,
                           0.33,
                           _firstnameController,
-                          Colors.transparent),
+                          Colors.transparent,5),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
@@ -80,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context,
                           0.33,
                           _lastnameController,
-                          Colors.transparent),
+                          Colors.transparent,5),
                     ],
                   ),
                   BuildWidgets().buildTextField(
@@ -111,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context,
                           0.33,
                           _passwordController,
-                          Colors.transparent),
+                          Colors.transparent,5),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
@@ -122,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           0.33,
                           _passwordConfirmController,
                           passwordValidate(_passwordController.text,
-                              _passwordConfirmController.text, context)),
+                              _passwordConfirmController.text, context),5),
                     ],
                   ),
                   BuildWidgets().buildTextFont(context, 12, FontWeight.w200,
@@ -136,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  BuildWidgets().buildButton(context, size, "Proximo",
+                  BuildWidgets().buildButton(context, "Proximo",
                       () async {
                     dynamic emailValidated =
                         emailValidate(_emailController.text, context);

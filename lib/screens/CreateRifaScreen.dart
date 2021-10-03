@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
@@ -13,6 +14,8 @@ class CreateRifaScreen extends StatefulWidget {
 }
 
 class _CreateRifaScreenState extends State<CreateRifaScreen> {
+  bool awaitValidation = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +62,8 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                 )),
             IconButton(
                 onPressed: () {
-                  Utils().navigatorToNoReturnNoAnimated(context, ConfigScreen());
+                  Utils()
+                      .navigatorToNoReturnNoAnimated(context, ConfigScreen());
                 },
                 icon: Icon(
                   Icons.settings,
@@ -90,19 +94,31 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BuildWidgets().buildTextFont(context, 20, FontWeight.w800,
-                      "Crie uma rifa", Colors.white),
+                  BuildWidgets().buildTextFont(context, 20, FontWeight.w700,
+                      "Adicionar credito", Colors.white),
                 ],
               )),
           Expanded(
               child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: BuildWidgets().getSize(context).height*0.03,),
-              Row(children: [
-                BuildWidgets().buildTextFont(context, 15, FontWeight.w500, "Nome da rifa", Colors.black),
-              ],),
-              BuildWidgets().buildTextFont(
-                  context, 20, FontWeight.w800, "Crie uma rifa", Colors.black),
+              SizedBox(
+                height: BuildWidgets().getSize(context).height*0.07,
+              ),
+              BuildWidgets().buildTextFont(context, 14, FontWeight.w600, "1 Real = 1 Crédito VEXA", Colors.black),
+              BuildWidgets().buildButton(context, "10 Créditos", (){}, awaitValidation),
+              BuildWidgets().buildButton(context, "20 Créditos", (){}, awaitValidation),
+              BuildWidgets().buildButton(context, "40 Créditos", (){}, awaitValidation),
+              BuildWidgets().buildButton(context, "80 Créditos", (){}, awaitValidation),
+              BuildWidgets().buildButton(context, "100 Créditos", (){}, awaitValidation),
+              Container(
+              height: 100,
+              width: 150,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                      image: AssetImage('assets/png/mercado-pago-logo.png'))),
+            ),
             ],
           ))
         ],

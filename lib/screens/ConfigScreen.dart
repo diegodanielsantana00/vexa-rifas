@@ -123,36 +123,17 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                         context,
                                         15,
                                         FontWeight.w500,
-                                        "Rifas Ativas",
+                                        "Seus Créditos VEXA",
                                         Colors.white),
-                                    BuildWidgets().buildTextFont(context, 28,
-                                        FontWeight.w500, "12", Colors.white)
-                                  ],
-                                ),
-                                SizedBox(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                    SizedBox(
+                                      height: 12,
                                     ),
-                                  ),
-                                  width: 4,
-                                  height:
-                                      BuildWidgets().getSize(context).height *
-                                          0.1,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    BuildWidgets().buildTextFont(
-                                        context,
-                                        15,
-                                        FontWeight.w500,
-                                        "Rifas Fecha.",
-                                        Colors.white),
-                                    BuildWidgets().buildTextFont(context, 28,
-                                        FontWeight.w500, "28", Colors.white)
+                                    Row(children: [
+                                      BuildWidgets().buildTextFont(context, 28,
+                                        FontWeight.w500, "1.102", Colors.white),
+                                      BuildWidgets().buildTextFont(context, 16,
+                                        FontWeight.w500, " Creditos", Colors.white)
+                                    ],)
                                   ],
                                 ),
                               ],
