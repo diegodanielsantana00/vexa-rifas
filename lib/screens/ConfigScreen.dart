@@ -147,8 +147,6 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             Icons.shop_2_outlined,
                             Colors.black),
                         BuildWidgets().buildTopicsConfig(context,
-                            "Minhas Vendas", Icons.money, Colors.black),
-                        BuildWidgets().buildTopicsConfig(context,
                             "Config. de Conta", Icons.settings, Colors.black),
                         BuildWidgets().buildTopicsConfig(
                             context, "Sair da conta", Icons.logout, Colors.red),

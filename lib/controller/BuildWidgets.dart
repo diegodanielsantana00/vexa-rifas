@@ -155,7 +155,7 @@ class BuildWidgets {
       padding: const EdgeInsets.only(top: 15),
       child: GestureDetector(
         onTap: (){
-          Utils().navigatorToReturn(context, RifasScreen(name));
+          Utils().navigatorToReturn(context, RifasScreen(name, priceRifas));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

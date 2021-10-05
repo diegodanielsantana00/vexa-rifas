@@ -27,4 +27,17 @@ class Utils {
   navigatorBack(context) {
     Navigator.of(context).pop();
   }
+
+  String moneyTransform(dynamic moneyRifa) {
+    String money = "$moneyRifa";
+    if (money.length == 4) {
+      money = "${moneyRifa}0";
+    } else if (money.length == 2) {
+      money = "$moneyRifa,00";
+    } else if (money.length == 1) {
+      money = "$moneyRifa,00";
+    } else {}
+    money = money.replaceAll(".", ",");
+    return money;
+  }
 }
