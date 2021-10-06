@@ -43,9 +43,9 @@ class _ValidationScreenState extends State<ValidationScreen> {
     refresh() => setState(() {});
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
         appBar: AppBar(
-          backgroundColor: AplicativoCollor,
+          backgroundColor: aplicativoCollor,
           shadowColor: Colors.transparent,
           title: Container(
             height: size.height * 0.13,
@@ -98,7 +98,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                       awaitValidation = false;
                       refresh();
                      } else {
-                       dadosLocal = DataLocal().addDadosList(boolEmailVerification["email"], widget.idToken, dadosLocal, context);
+                       dadosLocal = DataLocal().addDadosList(boolEmailVerification["users"][0]["email"], widget.idToken, dadosLocal, context, true);
                        DataLocal().saveData(dadosLocal);
                        Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -106,7 +106,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                      }
                     
                     
-                  }, awaitValidation),
+                  }, awaitValidation,0.6,10),
             ],
           ),
         ));

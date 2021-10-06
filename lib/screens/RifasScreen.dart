@@ -3,13 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
+import 'package:vexa_rifas/screens/ShopRifaScreen.dart';
 
+// ignore: must_be_immutable
 class RifasScreen extends StatefulWidget {
-  // const RifasScreen({Key? key}) : super(key: key);
-
   String nameRifa;
   dynamic priceRifa;
-  RifasScreen(this.nameRifa, this.priceRifa);
+  int countRifas;
+  RifasScreen(this.nameRifa, this.priceRifa, this.countRifas);
   @override
   _RifasScreenState createState() => _RifasScreenState();
 }
@@ -23,7 +24,7 @@ class _RifasScreenState extends State<RifasScreen> {
           icon: Icon(Icons.arrow_back_ios_new_outlined),
           onPressed: () => Utils().navigatorBack(context),
         ),
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
         shadowColor: Colors.transparent,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,9 +45,9 @@ class _RifasScreenState extends State<RifasScreen> {
           ],
         ),
         onPressed: () {
-          print("Tela comprar");
+          Utils().navigatorToReturn(context, ShopRifaScreen(widget.nameRifa, widget.countRifas,widget.priceRifa));
         },
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

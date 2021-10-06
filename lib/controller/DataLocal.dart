@@ -5,12 +5,13 @@ import 'dart:io';
 
 
 class DataLocal {
-  List addDadosList(String email, String token, dynamic dados, dynamic context) {
+  List addDadosList(String email, String token, dynamic dados, dynamic context, bool validationEmail) {
     // ignore: invalid_use_of_protected_member
     (context as Element).reassemble();
     Map<String, dynamic> newDadosList = Map();
     newDadosList["Email"] = email;
     newDadosList["Token"] = token;
+    newDadosList["ValidationEmail"] = validationEmail;
     dados = [];
     dados.add(newDadosList);
     return dados;

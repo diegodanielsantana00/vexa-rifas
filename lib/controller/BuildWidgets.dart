@@ -11,17 +11,17 @@ class BuildWidgets {
   }
 
   buildButton(BuildContext context, String text, dynamic ontap,
-      bool awaitValidation) {
+      bool awaitValidation, double sizeHorizontal, double horizontal) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: getSize(context).width * 0.6,
+      margin: EdgeInsets.symmetric(vertical: horizontal),
+      width: getSize(context).width * sizeHorizontal,
       // ignore: deprecated_member_use
       child: FlatButton(
           shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0),
           ),
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-          color: AplicativoCollor600,
+          color: aplicativoCollor600,
           onPressed: ontap,
           child: buildAwaitValidation(awaitValidation, text, context)),
     );
@@ -41,7 +41,7 @@ class BuildWidgets {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalHeigth),
       width: getSize(context).width * width,
       decoration: BoxDecoration(
-        color: AplicativoCollor50,
+        color: aplicativoCollor50,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: colorBorder,
@@ -58,11 +58,11 @@ class BuildWidgets {
         autocorrect: false,
         obscureText: obscure,
         autofillHints: [AutofillHints.email],
-        cursorColor: AplicativoCollor,
+        cursorColor: aplicativoCollor,
         decoration: InputDecoration(
           icon: Icon(
             icon,
-            color: AplicativoCollor,
+            color: aplicativoCollor,
           ),
           hintText: type,
           border: InputBorder.none,
@@ -79,7 +79,7 @@ class BuildWidgets {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalHeight),
       width: getSize(context).width * width,
       decoration: BoxDecoration(
-        color: AplicativoCollor50,
+        color: aplicativoCollor50,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: colorBorder,
@@ -96,7 +96,7 @@ class BuildWidgets {
         autocorrect: false,
         obscureText: obscure,
         autofillHints: [AutofillHints.email],
-        cursorColor: AplicativoCollor,
+        cursorColor: aplicativoCollor,
         decoration: InputDecoration(
           hintText: type,
           border: InputBorder.none,
@@ -114,7 +114,7 @@ class BuildWidgets {
       height: 55,
       width: getSize(context).width * width,
       decoration: BoxDecoration(
-        color: AplicativoCollor50,
+        color: aplicativoCollor50,
         borderRadius: BorderRadius.circular(8),
       ),
       child: TextFormField(
@@ -127,7 +127,7 @@ class BuildWidgets {
         enableSuggestions: false,
         autocorrect: false,
         obscureText: obscure,
-        cursorColor: AplicativoCollor,
+        cursorColor: aplicativoCollor,
         decoration: InputDecoration(
           border: InputBorder.none,
         ),
@@ -150,12 +150,12 @@ class BuildWidgets {
   }
 
   Widget buildRifasShop(
-      dynamic context, String name, dynamic priceRifas, String url) {
+      dynamic context, String name, double priceRifas, String url, int countRifas) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: GestureDetector(
         onTap: (){
-          Utils().navigatorToReturn(context, RifasScreen(name, priceRifas));
+          Utils().navigatorToReturn(context, RifasScreen(name, priceRifas, countRifas));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

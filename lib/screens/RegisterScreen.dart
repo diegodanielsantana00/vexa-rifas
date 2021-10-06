@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
+import 'package:vexa_rifas/controller/DataLocal.dart';
+import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/Validate.dart';
@@ -8,6 +10,7 @@ import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/ValidationScrenn.dart';
 
 bool awaitValidation = false;
+List dadosLocal = [];
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -31,13 +34,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-          backgroundColor: AplicativoCollor,
+          backgroundColor: aplicativoCollor,
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Utils().navigatorBack(context),
             ),
-            backgroundColor: AplicativoCollor,
+            backgroundColor: aplicativoCollor,
             shadowColor: Colors.transparent,
             title: Container(
               height: size.height * 0.13,
@@ -70,7 +73,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context,
                           0.33,
                           _firstnameController,
-                          Colors.transparent,5),
+                          Colors.transparent,
+                          5),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
@@ -80,7 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context,
                           0.33,
                           _lastnameController,
-                          Colors.transparent,5),
+                          Colors.transparent,
+                          5),
                     ],
                   ),
                   BuildWidgets().buildTextField(
@@ -111,7 +116,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context,
                           0.33,
                           _passwordController,
-                          Colors.transparent,5),
+                          Colors.transparent,
+                          5),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
@@ -122,7 +128,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           0.33,
                           _passwordConfirmController,
                           passwordValidate(_passwordController.text,
-                              _passwordConfirmController.text, context),5),
+                              _passwordConfirmController.text, context),
+                          5),
                     ],
                   ),
                   BuildWidgets().buildTextFont(context, 12, FontWeight.w200,
@@ -136,8 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  BuildWidgets().buildButton(context, "Proximo",
-                      () async {
+                  BuildWidgets().buildButton(context, "Proximo", () async {
                     dynamic emailValidated =
                         emailValidate(_emailController.text, context);
                     dynamic password2Validated = passwordValidate(
@@ -164,6 +170,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           refresh();
                         }
                       } catch (e) {
+                        await RealTimeFireBase().setDadosRegister(
+                            _emailController.text
+                                .replaceAll(".", "")
+                                .replaceAll("_", "")
+                                .replaceAll("/", "")
+                                .replaceAll("@", "")
+                                .replaceAll("\\", ""),
+                            _numberController.text,
+                            "${_firstnameController.text} ${_lastnameController.text}");
+                        dadosLocal = DataLocal().addDadosList(
+                            _emailController.text,
+                            validationBD["idToken"],
+                            dadosLocal,
+                            context,
+                            false);
+                        DataLocal().saveData(dadosLocal);
                         await RegisterController()
                             .verifyEmailFireBaseUser(validationBD["idToken"]);
                         Navigator.of(context).pushAndRemoveUntil(
@@ -178,7 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     }
                     awaitValidation = false;
                     refresh();
-                  }, awaitValidation),
+                  }, awaitValidation, 0.6, 10),
                 ],
               ),
             ),

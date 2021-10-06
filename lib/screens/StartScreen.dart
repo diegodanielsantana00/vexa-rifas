@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
+import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
@@ -21,8 +23,14 @@ class _StartScreenState extends State<StartScreen> {
 
     dynamic screen = LoginScreen();
     // Se ja tem conta criada
-    DataLocal().readData().then((data) {
-      screen = HomeScreen(); // RESPONSAVEL PARA VERIFICAR LOGIN
+    DataLocal().readData().then((data) async{
+      dynamic dados = json.decode(data!);
+      if (dados[0]["ValidationEmail"] == false) {
+        
+      }else{
+        screen = HomeScreen(); // RESPONSAVEL PARA VERIFICAR LOGIN
+      }
+
     }).catchError((data) {
       // AlertsDialogValidate().erroAlert(context, 'Ocorreu um erro, faça login novamente');
     });
@@ -36,9 +44,9 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
         appBar: AppBar(
-          backgroundColor: AplicativoCollor,
+          backgroundColor: aplicativoCollor,
           shadowColor: Colors.transparent,
           title: Container(
             height: size.height * 0.13,

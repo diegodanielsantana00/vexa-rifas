@@ -3,12 +3,9 @@ import 'package:hexcolor/hexcolor.dart';
 
 
 // Colors
-// ignore: non_constant_identifier_names
-Color AplicativoCollor = HexColor('#8C7018');
-// ignore: non_constant_identifier_names
-Color AplicativoCollor50 = HexColor('#edddab');
-// ignore: non_constant_identifier_names
-Color AplicativoCollor600 = HexColor("#3d2f00");
+Color aplicativoCollor = HexColor('#8C7018');
+Color aplicativoCollor50 = HexColor('#edddab');
+Color aplicativoCollor600 = HexColor("#3d2f00");
 
 
 //HTTPS LINKS

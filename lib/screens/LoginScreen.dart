@@ -30,9 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-          backgroundColor: AplicativoCollor,
+          backgroundColor: aplicativoCollor,
           appBar: AppBar(
-            backgroundColor: AplicativoCollor,
+            backgroundColor: aplicativoCollor,
             shadowColor: Colors.transparent,
             title: Container(
               height: size.height * 0.13,
@@ -80,21 +80,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       } catch (e) {
                         dynamic boolEmailVerification = await RegisterController().getUserFireBase(validationBD["idToken"]);
-                        print("boolEmailVerification" + boolEmailVerification.toString());
                          if (boolEmailVerification["users"][0]["emailVerified"] == false) {
                           await RegisterController().verifyEmailFireBaseUser(validationBD["idToken"]);
                             Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(builder: (context) => ValidationScreen(validationBD["idToken"], validationBD["email"])),
                             (Route<dynamic> route) => false);
                          } else {
-                           dadosLocal = DataLocal().addDadosList(validationBD["email"], validationBD["idToken"], dadosLocal, context);
+                           dadosLocal = DataLocal().addDadosList(validationBD["email"], validationBD["idToken"], dadosLocal, context, true);
                            DataLocal().saveData(dadosLocal);
                            Utils().navigatorToNoReturn(context, HomeScreen());
                          }
                         
                       }
             
-                  }, awaitValidation),
+                  }, awaitValidation,0.6,10),
                   BuildWidgets().buildTextFont(context, 12, FontWeight.w400,
                       "Esqueci a senha", Colors.white),
                   SizedBox(
@@ -108,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   BuildWidgets().buildButton(context, "Criar uma conta", () {
                     Utils().navigatorToReturn(context, RegisterScreen());
-                  }, false),
+                  }, false, 0.6,10),
                 ],
               ),
             ),

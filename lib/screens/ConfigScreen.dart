@@ -18,7 +18,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Text(""),
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
         shadowColor: Colors.transparent,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +63,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                 onPressed: () {},
                 icon: Icon(
                   Icons.settings,
-                  color: AplicativoCollor,
+                  color: aplicativoCollor,
                 ))
           ],
         ),
@@ -74,7 +74,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
               height: BuildWidgets().getSize(context).height * 0.15,
               width: BuildWidgets().getSize(context).width,
               decoration: BoxDecoration(
-                color: AplicativoCollor,
+                color: aplicativoCollor,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(60),
                     bottomRight: Radius.circular(60)),
@@ -109,7 +109,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                 BuildWidgets().getSize(context).height * 0.15,
                             width: BuildWidgets().getSize(context).width * 0.7,
                             decoration: BoxDecoration(
-                              color: AplicativoCollor,
+                              color: aplicativoCollor,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),

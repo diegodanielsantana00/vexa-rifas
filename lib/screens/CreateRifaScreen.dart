@@ -21,7 +21,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Text(""),
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
         shadowColor: Colors.transparent,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +41,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
         child: Icon(
           Icons.add,
           color: Colors.white,
@@ -78,7 +78,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
               height: BuildWidgets().getSize(context).height * 0.08,
               width: BuildWidgets().getSize(context).width,
               decoration: BoxDecoration(
-                color: AplicativoCollor,
+                color: aplicativoCollor,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(60),
                     bottomRight: Radius.circular(60)),
@@ -106,11 +106,11 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                 height: BuildWidgets().getSize(context).height*0.07,
               ),
               BuildWidgets().buildTextFont(context, 14, FontWeight.w600, "1 Real = 1 Crédito VEXA", Colors.black),
-              BuildWidgets().buildButton(context, "10 Créditos", (){}, awaitValidation),
-              BuildWidgets().buildButton(context, "20 Créditos", (){}, awaitValidation),
-              BuildWidgets().buildButton(context, "40 Créditos", (){}, awaitValidation),
-              BuildWidgets().buildButton(context, "80 Créditos", (){}, awaitValidation),
-              BuildWidgets().buildButton(context, "100 Créditos", (){}, awaitValidation),
+              BuildWidgets().buildButton(context, "10 Créditos", (){}, awaitValidation, 0.6, 10),
+              BuildWidgets().buildButton(context, "20 Créditos", (){}, awaitValidation,0.6,10),
+              BuildWidgets().buildButton(context, "40 Créditos", (){}, awaitValidation,0.6,10),
+              BuildWidgets().buildButton(context, "80 Créditos", (){}, awaitValidation,0.6,10),
+              BuildWidgets().buildButton(context, "100 Créditos", (){}, awaitValidation,0.6,10),
               Container(
               height: 100,
               width: 150,

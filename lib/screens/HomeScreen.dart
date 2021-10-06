@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Text(""),
-        backgroundColor: AplicativoCollor,
+        backgroundColor: aplicativoCollor,
         shadowColor: Colors.transparent,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {},
                 icon: Icon(
                   Icons.home,
-                  color: AplicativoCollor,
+                  color: aplicativoCollor,
                 )),
             IconButton(
                 onPressed: () {
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Container(
-              color: AplicativoCollor,
+              color: aplicativoCollor,
               height: BuildWidgets().getSize(context).height * 0.15,
               width: BuildWidgets().getSize(context).width,
               child: Column(
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (snapshot.data!["${index}produtoRifa"]["exibir"] == true) {
                   return Column(
                   children: [
-                    BuildWidgets().buildRifasShop(context, snapshot.data!["${index}produtoRifa"]["nomeFantasia"], Utils().moneyTransform(snapshot.data!["${index}produtoRifa"]["precoRifas"]),snapshot.data!["${index}produtoRifa"]["url"] )
+                    BuildWidgets().buildRifasShop(context, snapshot.data!["${index}produtoRifa"]["nomeFantasia"], snapshot.data!["${index}produtoRifa"]["precoRifas"].toDouble() ,snapshot.data!["${index}produtoRifa"]["url"], snapshot.data!["${index}produtoRifa"]["quantidadeRifas"] )
                   ],
                 );
                 }else{
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children = <Widget>[
                     SizedBox(
                       child: CircularProgressIndicator(
-                        color: AplicativoCollor,
+                        color: aplicativoCollor,
                       ),
                       width: 60,
                       height: 60,
