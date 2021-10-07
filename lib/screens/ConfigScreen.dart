@@ -1,9 +1,16 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
+import 'package:vexa_rifas/controller/DataLocal.dart';
+import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
+
+List dadosLocal = [];
+dynamic credit = 1;
+int segundsController = 0;
 
 class ConfigScreen extends StatefulWidget {
   const ConfigScreen({Key? key}) : super(key: key);
@@ -13,6 +20,19 @@ class ConfigScreen extends StatefulWidget {
 }
 
 class _ConfigScreenState extends State<ConfigScreen> {
+  void initState() {
+    super.initState();
+
+    DataLocal().readData().then((data) async {
+      dadosLocal = json.decode(data!);
+    }).catchError((data) {
+      AlertsDialogValidate()
+          .erroAlert(context, 'Ocorreu um erro, faça login novamente');
+    });
+    setState(() {});
+    // credit = RealTimeFireBase().getDataUser(dadosLocal[0]["Email"]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,12 +148,17 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                     SizedBox(
                                       height: 12,
                                     ),
-                                    Row(children: [
-                                      BuildWidgets().buildTextFont(context, 28,
-                                        FontWeight.w500, "1.102", Colors.white),
-                                      BuildWidgets().buildTextFont(context, 16,
-                                        FontWeight.w500, " Creditos", Colors.white)
-                                    ],)
+                                    Row(
+                                      children: [
+                                        futureBuilderController(),
+                                        BuildWidgets().buildTextFont(
+                                            context,
+                                            16,
+                                            FontWeight.w500,
+                                            " Creditos",
+                                            Colors.white)
+                                      ],
+                                    )
                                   ],
                                 ),
                               ],
@@ -159,4 +184,72 @@ class _ConfigScreenState extends State<ConfigScreen> {
       ),
     );
   }
+}
+
+Widget futureBuilderController() {
+  return FutureBuilder<String?>(
+    future: DataLocal().readData(),
+    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+      List<Widget> children;
+      if (snapshot.hasData) {
+        return FutureBuilder<Map>(
+          future: RealTimeFireBase()
+              .getDataUser(json.decode(snapshot.data!)[0]["Email"]),
+          builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
+            List<Widget> children;
+            if (snapshot.hasData) {
+              return BuildWidgets().buildTextFont(context, 28, FontWeight.w500,
+                  snapshot.data!["creditos"].toString(), Colors.white);
+            } else if (snapshot.hasError) {
+              return Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 20,
+              );
+            } else {
+              children = <Widget>[
+                Container(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                )
+              ];
+            }
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: children,
+              ),
+            );
+          },
+        );
+      } else if (snapshot.hasError) {
+        return Icon(
+          Icons.error_outline,
+          color: Colors.red,
+          size: 20,
+        );
+      } else {
+        children = <Widget>[
+          Container(
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          ),
+        ];
+      }
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: children,
+        ),
+      );
+    },
+  );
 }

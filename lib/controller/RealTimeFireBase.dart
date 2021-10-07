@@ -9,14 +9,26 @@ class RealTimeFireBase {
     return jsonDecode(response.body);
   }
 
-  Future<Map> setDadosRegister(String emailUser, String numberPhone,String name) async {
-  http.Response response2 = await http.patch(Uri.parse('$APIRealTime/users/$emailUser.json'),
-      body: json.encode({
-        "creditos": 0.0,
-        "email": emailUser,
-        "nome": name,
-        "numero": numberPhone
-        })).catchError((onError){print(onError);});
-  return jsonDecode(response2.body);
-}
+  
+  Future<Map>  getDataUser(String email) async {
+    http.Response response = await http.get(Uri.parse(
+        '$APIRealTime/users/${email.replaceAll(".", "").replaceAll("_", "").replaceAll("/", "").replaceAll("@", "").replaceAll("\\", "").replaceAll(" ", "")}.json'));
+    return jsonDecode(response.body);
+  }
+
+  Future<Map> setDadosRegister(
+      String emailUser, String numberPhone, String name) async {
+    http.Response response2 = await http
+        .patch(Uri.parse('$APIRealTime/users/$emailUser.json'),
+            body: json.encode({
+              "creditos": 0.0,
+              "email": emailUser,
+              "nome": name,
+              "numero": numberPhone
+            }))
+        .catchError((onError) {
+      print(onError);
+    });
+    return jsonDecode(response2.body);
+  }
 }

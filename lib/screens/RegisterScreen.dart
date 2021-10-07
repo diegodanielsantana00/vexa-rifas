@@ -144,6 +144,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   BuildWidgets().buildButton(context, "Proximo", () async {
+                    awaitValidation = true;
+                    refresh();
                     dynamic emailValidated =
                         emailValidate(_emailController.text, context);
                     dynamic password2Validated = passwordValidate(
@@ -157,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         _passwordConfirmController.text != "") {
                       dynamic validationBD = await RegisterController()
                           .registerFireBaseUser(
-                              _emailController.text,
+                              _emailController.text.replaceAll(" ", ""),
                               _passwordConfirmController.text,
                               _firstnameController.text,
                               _lastnameController.text,
@@ -176,7 +178,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 .replaceAll("_", "")
                                 .replaceAll("/", "")
                                 .replaceAll("@", "")
-                                .replaceAll("\\", ""),
+                                .replaceAll("\\", "")
+                                .replaceAll(" ", ""),
                             _numberController.text,
                             "${_firstnameController.text} ${_lastnameController.text}");
                         dadosLocal = DataLocal().addDadosList(
