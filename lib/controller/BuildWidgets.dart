@@ -72,8 +72,14 @@ class BuildWidgets {
     );
   }
 
-  Widget buildTextFieldNoIcon(String type, bool obscure, dynamic context,
-      double width, dynamic controller, dynamic colorBorder, double verticalHeight) {
+  Widget buildTextFieldNoIcon(
+      String type,
+      bool obscure,
+      dynamic context,
+      double width,
+      dynamic controller,
+      dynamic colorBorder,
+      double verticalHeight) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalHeight),
@@ -149,13 +155,14 @@ class BuildWidgets {
     );
   }
 
-  Widget buildRifasShop(
-      dynamic context, String name, double priceRifas, String url, int countRifas) {
+  Widget buildRifasShop(dynamic context, String name, double priceRifas,
+      String url, int countRifas, int idRifa) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: GestureDetector(
-        onTap: (){
-          Utils().navigatorToReturn(context, RifasScreen(name, priceRifas, countRifas));
+        onTap: () {
+          Utils().navigatorToReturn(
+              context, RifasScreen(name, priceRifas, countRifas, idRifa));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -184,7 +191,8 @@ class BuildWidgets {
                   SizedBox(
                     height: 6,
                   ),
-                  buildTextFont(context, 17, FontWeight.w500, name, Colors.black),
+                  buildTextFont(
+                      context, 17, FontWeight.w500, name, Colors.black),
                   SizedBox(
                     height: 6,
                   ),
@@ -266,19 +274,85 @@ class BuildWidgets {
 }
 
 class AlertsDialogValidate {
-  erroAlert(dynamic context, String errorText) {
+  erroAlert(dynamic context, String errorText, int autoHide, Function function, String bntText, bool dismissOnTouchOutside1) {
+    if (autoHide > 1) {
+      return AwesomeDialog(
+        context: context,
+        dialogType: DialogType.ERROR,
+        animType: AnimType.SCALE,
+        headerAnimationLoop: false,
+        title: 'Ops...',
+        desc: errorText,
+        btnCancelOnPress: function,
+        // btnOkIcon: Icons.cancel,
+        btnCancelColor: Colors.red[700],
+        autoHide: Duration(seconds: autoHide),
+        btnCancelText: bntText,
+        dismissOnTouchOutside: dismissOnTouchOutside1
+      )..show();
+    } else {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.ERROR,
+        animType: AnimType.SCALE,
+        headerAnimationLoop: false,
+        title: 'Ops...',
+        desc: errorText,
+        btnCancelOnPress: function,
+        // btnOkIcon: Icons.cancel,
+        btnCancelColor: Colors.red[700],
+        btnCancelText: bntText,
+        dismissOnTouchOutside: dismissOnTouchOutside1
+      )..show();
+    }
+  }
+
+sucessAlert(dynamic context, String errorText, int autoHide, Function function, bool dismissOnTouchOutside1) {
+    if (autoHide > 1) {
+      return AwesomeDialog(
+        context: context,
+        dialogType: DialogType.SUCCES,
+        animType: AnimType.SCALE,
+        headerAnimationLoop: false,
+        title: 'SUCESSO!',
+        desc: errorText,
+        btnCancelOnPress: function,
+        btnOkIcon: Icons.check_circle_outline,
+        btnOkColor: Colors.green[700],
+        autoHide: Duration(seconds: autoHide),
+        btnOkText: "Ok",
+        dismissOnTouchOutside: dismissOnTouchOutside1
+      )..show();
+    } else {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.SUCCES,
+        animType: AnimType.SCALE,
+        headerAnimationLoop: false,
+        title: 'SUCESSO!',
+        desc: errorText,
+        btnOkOnPress: function,
+        btnOkIcon: Icons.check_circle_outline,
+        btnOkColor: Colors.green[700],
+        btnOkText: "Ok",
+        dismissOnTouchOutside: dismissOnTouchOutside1
+      )..show();
+    }
+  }
+
+  infoAlert(dynamic context, String title, String infoText, Function function) {
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.ERROR,
+      dialogType: DialogType.INFO,
       animType: AnimType.SCALE,
       headerAnimationLoop: false,
-      title: 'Ops...',
-      desc: errorText,
-      btnOkOnPress: () {},
-      // btnOkIcon: Icons.cancel,
-      btnOkColor: Colors.red[700],
-      autoHide: Duration(seconds: 5),
-      btnOkText: 'Fechar',
+      title: title,
+      desc: infoText,
+      btnCancelColor: Colors.red[700],
+      btnCancelOnPress: () {},
+      btnOkOnPress: function,
+      btnOkColor: Colors.green[700],
+      btnOkText: 'Comprar',
     )..show();
   }
 }

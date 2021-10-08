@@ -19,7 +19,6 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
   void initState() {
     super.initState();
-
     dynamic screen = LoginScreen();
     // Se ja tem conta criada
     DataLocal().readData().then((data) async{

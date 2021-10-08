@@ -10,7 +10,8 @@ class RifasScreen extends StatefulWidget {
   String nameRifa;
   dynamic priceRifa;
   int countRifas;
-  RifasScreen(this.nameRifa, this.priceRifa, this.countRifas);
+  int idRifa;
+  RifasScreen(this.nameRifa, this.priceRifa, this.countRifas, this.idRifa);
   @override
   _RifasScreenState createState() => _RifasScreenState();
 }
@@ -45,7 +46,7 @@ class _RifasScreenState extends State<RifasScreen> {
           ],
         ),
         onPressed: () {
-          Utils().navigatorToReturn(context, ShopRifaScreen(widget.nameRifa, widget.countRifas,widget.priceRifa));
+          Utils().navigatorToReturn(context, ShopRifaScreen(widget.nameRifa, widget.countRifas,widget.priceRifa, widget.idRifa));
         },
         backgroundColor: aplicativoCollor,
       ),

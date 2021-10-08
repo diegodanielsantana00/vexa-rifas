@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (snapshot.data!["${index}produtoRifa"]["exibir"] == true) {
                   return Column(
                   children: [
-                    BuildWidgets().buildRifasShop(context, snapshot.data!["${index}produtoRifa"]["nomeFantasia"], snapshot.data!["${index}produtoRifa"]["precoRifas"].toDouble() ,snapshot.data!["${index}produtoRifa"]["url"], snapshot.data!["${index}produtoRifa"]["quantidadeRifas"] )
+                    BuildWidgets().buildRifasShop(context, snapshot.data!["${index}produtoRifa"]["nomeFantasia"], snapshot.data!["${index}produtoRifa"]["precoRifas"].toDouble() ,snapshot.data!["${index}produtoRifa"]["url"], snapshot.data!["${index}produtoRifa"]["quantidadeRifas"], index)
                   ],
                 );
                 }else{

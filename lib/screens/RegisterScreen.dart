@@ -167,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       try {
                         if (validationBD["error"]["code"] == 400) {
                           AlertsDialogValidate()
-                              .erroAlert(context, 'Email já cadastrado.');
+                              .erroAlert(context, 'Email já cadastrado.', 5, (){}, "Fechar", true);
                           awaitValidation = false;
                           refresh();
                         }

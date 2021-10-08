@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           awaitValidation = false;
                           _passwordController.text = "";
                           refresh();
-                          AlertsDialogValidate().erroAlert(context, 'Usuário ou senha inválido.');
+                          AlertsDialogValidate().erroAlert(context, 'Usuário ou senha inválido.', 5,(){}, "Fechar", true);
                         }
                       } catch (e) {
                         dynamic boolEmailVerification = await RegisterController().getUserFireBase(validationBD["idToken"]);

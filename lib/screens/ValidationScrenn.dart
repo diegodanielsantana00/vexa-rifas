@@ -94,7 +94,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                    refresh();
                     dynamic boolEmailVerification = await RegisterController().getUserFireBase(widget.idToken);
                      if (boolEmailVerification["users"][0]["emailVerified"] == false) {
-                      AlertsDialogValidate().erroAlert(context, 'Email não validado, Por favor valide');
+                      AlertsDialogValidate().erroAlert(context, 'Email não validado, Por favor valide', 5, (){}, "Fechar", true);
                       awaitValidation = false;
                       refresh();
                      } else {

@@ -1,13 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
+import 'package:vexa_rifas/controller/DataLocal.dart';
+import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/ConfigScreen.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 
 class CreateRifaScreen extends StatefulWidget {
-  const CreateRifaScreen({Key? key}) : super(key: key);
+  // const CreateRifaScreen({Key? key}) : super(key: key);
+
+  CreateRifaScreen();
 
   @override
   _CreateRifaScreenState createState() => _CreateRifaScreenState();
@@ -15,6 +21,10 @@ class CreateRifaScreen extends StatefulWidget {
 
 class _CreateRifaScreenState extends State<CreateRifaScreen> {
   bool awaitValidation = false;
+
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +108,22 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                       "Adicionar credito", Colors.white),
                 ],
               )),
-          Expanded(
+          futureBuilderController(awaitValidation)
+        ],
+      ),
+    );
+  }
+}
+
+
+
+Widget futureBuilderController(bool awaitValidation) {
+  return FutureBuilder<String?>(
+    future: DataLocal().readData(),
+    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+      List<Widget> children;
+      if (snapshot.hasData) {
+        return Expanded(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -106,11 +131,21 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                 height: BuildWidgets().getSize(context).height*0.07,
               ),
               BuildWidgets().buildTextFont(context, 14, FontWeight.w600, "1 Real = 1 Crédito VEXA", Colors.black),
-              BuildWidgets().buildButton(context, "10 Créditos", (){}, awaitValidation, 0.6, 10),
-              BuildWidgets().buildButton(context, "20 Créditos", (){}, awaitValidation,0.6,10),
-              BuildWidgets().buildButton(context, "40 Créditos", (){}, awaitValidation,0.6,10),
-              BuildWidgets().buildButton(context, "80 Créditos", (){}, awaitValidation,0.6,10),
-              BuildWidgets().buildButton(context, "100 Créditos", (){}, awaitValidation,0.6,10),
+              BuildWidgets().buildButton(context, "10 Créditos", (){
+                RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 10);
+              }, awaitValidation, 0.6, 10),
+              BuildWidgets().buildButton(context, "20 Créditos", (){
+                RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 20);
+              }, awaitValidation,0.6,10),
+              BuildWidgets().buildButton(context, "40 Créditos", (){
+                RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 40);
+              }, awaitValidation,0.6,10),
+              BuildWidgets().buildButton(context, "80 Créditos", (){
+                RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 80);
+              }, awaitValidation,0.6,10),
+              BuildWidgets().buildButton(context, "100 Créditos", (){
+                RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 100);
+              }, awaitValidation,0.6,10),
               Container(
               height: 100,
               width: 150,
@@ -120,9 +155,31 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
                       image: AssetImage('assets/png/mercado-pago-logo.png'))),
             ),
             ],
-          ))
-        ],
-      ),
-    );
-  }
+          ));
+      } else if (snapshot.hasError) {
+        return Icon(
+          Icons.error_outline,
+          color: Colors.red,
+          size: 20,
+        );
+      } else {
+        children = <Widget>[
+          Container(
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          ),
+        ];
+      }
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: children,
+        ),
+      );
+    },
+  );
 }

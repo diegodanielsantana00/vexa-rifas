@@ -27,7 +27,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
       dadosLocal = json.decode(data!);
     }).catchError((data) {
       AlertsDialogValidate()
-          .erroAlert(context, 'Ocorreu um erro, faça login novamente');
+          .erroAlert(context, 'Ocorreu um erro, faça login novamente', 5, (){}, "Fechar", true);
     });
     setState(() {});
     // credit = RealTimeFireBase().getDataUser(dadosLocal[0]["Email"]);
