@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
+import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
+import 'package:vexa_rifas/controller/Validate.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/RegisterScreen.dart';
@@ -94,8 +96,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
             
                   }, awaitValidation,0.6,10),
-                  BuildWidgets().buildTextFont(context, 12, FontWeight.w400,
+                  GestureDetector(
+                    onTap: (){
+                      if (emailValidate(_emailController.text, context) == Colors.transparent) {
+                          RegisterController().resetPassword(_emailController.text,context);
+                          // AlertsDialogValidate().sucessAlert(context, "Email enviado com sucesso, por favor verifique na caixa de entrada do seu e-email", 5, (){}, true);
+                          // AlertsDialogValidate().erroAlert(context, "Algo não deu certo, verifique o email e tente novamente.", 5, (){}, "Ok", true);
+                      } else {
+                        AlertsDialogValidate().erroAlert(context, "Coloque o seu email na caixa de texto de Email para resetar sua senha", 5, (){}, "Ok", true);
+                      }
+                    },
+                    child:BuildWidgets().buildTextFont(context, 12, FontWeight.w400,
                       "Esqueci a senha", Colors.white),
+                  ),
                   SizedBox(
                     height: size.height * 0.02,
                   ),

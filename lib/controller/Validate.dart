@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 Color emailValidate(String email, context) {
   if (email == "") {
-    return Colors.transparent;
+    return Colors.red;
   } else {
-    if (email.indexOf('@') >= 0 &&
-        email.indexOf('.') >= 0 &&
+    if (email.indexOf('@') > 0 &&
+        email.indexOf('.') > 0 &&
         email.indexOf(' ') == -1) {
       return Colors.transparent;
     } else {
@@ -14,9 +14,11 @@ Color emailValidate(String email, context) {
   }
 }
 
+
+
 Color passwordValidate(String password, String password2, context) {
   if (password2 == "") {
-    return Colors.transparent;
+    return Colors.red;
   }
   if (password == password2) {
     if (password.length >= 6) {

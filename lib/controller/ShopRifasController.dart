@@ -48,7 +48,7 @@ class ShopRifasController {
 
     if (listRifa.length != 0 && rifasShop!.length != 0) {
       for (var i = 0; i < listRifa.length; i++) {
-      for (var j = 0; j < rifasShop.length-1; j++) {
+      for (var j = 0; j < rifasShop.length; j++) {
         if (listRifa[i] == rifasShop[j]) {
           listRifa.remove(rifasShop[j]);
         }else{

@@ -16,6 +16,7 @@ const LoginLink = "https://identitytoolkit.googleapis.com/v1/accounts:signInWith
 const verifyEmailLink = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=$APIKey";
 const confirmVerifyEmailLink = "https://identitytoolkit.googleapis.com/v1/accounts:update?key=$APIKey";
 const getUserlINK = "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=$APIKey";
+const resetPasswordLink = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=$APIKey";
 
 //MENSSAGER
 
