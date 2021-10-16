@@ -7,6 +7,7 @@ import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
+import 'package:vexa_rifas/screens/LoginScreen.dart';
 
 List dadosLocal = [];
 dynamic credit = 1;
@@ -26,8 +27,8 @@ class _ConfigScreenState extends State<ConfigScreen> {
     DataLocal().readData().then((data) async {
       dadosLocal = json.decode(data!);
     }).catchError((data) {
-      AlertsDialogValidate()
-          .erroAlert(context, 'Ocorreu um erro, faça login novamente', 5, (){}, "Fechar", true);
+      AlertsDialogValidate().erroAlert(context,
+          'Ocorreu um erro, faça login novamente', 5, () {}, "Fechar", true);
     });
     setState(() {});
     // credit = RealTimeFireBase().getDataUser(dadosLocal[0]["Email"]);
@@ -173,8 +174,15 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             Colors.black),
                         BuildWidgets().buildTopicsConfig(context,
                             "Config. de Conta", Icons.settings, Colors.black),
-                        BuildWidgets().buildTopicsConfig(
+                        GestureDetector(
+                          onTap: () async {
+                            final file = await DataLocal().getData();
+                            await file.delete();
+                            Utils().navigatorToNoReturn(context, LoginScreen());
+                          },
+                          child: BuildWidgets().buildTopicsConfig(
                             context, "Sair da conta", Icons.logout, Colors.red),
+                        ),
                       ],
                     )),
               ],

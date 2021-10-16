@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
-import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/LoginScreen.dart';

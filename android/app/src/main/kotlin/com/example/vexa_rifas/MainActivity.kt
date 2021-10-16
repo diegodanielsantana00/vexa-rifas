@@ -1,4 +1,4 @@
-package com.example.vexa_rifas
+package com.danieldiego.vexa_rifas
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Container(
               color: aplicativoCollor,
-              height: BuildWidgets().getSize(context).height * 0.15,
+              height: BuildWidgets().getSize(context).height * 0.16,
               width: BuildWidgets().getSize(context).width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

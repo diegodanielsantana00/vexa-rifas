@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
-import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/controller/Validate.dart';
@@ -22,6 +21,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  void initState() {
+    super.initState();
+    awaitValidation = false;
+  }
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 

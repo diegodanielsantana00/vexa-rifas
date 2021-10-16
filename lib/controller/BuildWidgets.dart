@@ -174,7 +174,7 @@ class BuildWidgets {
                     height: getSize(context).width * 0.3,
                     width: getSize(context).width * 0.3,
                     child: Image.network(
-                      'https://picsum.photos/250?image=9',
+                      url,
                       height: getSize(context).width * 0.3,
                       width: getSize(context).width * 0.3,
                     ))),
@@ -202,7 +202,7 @@ class BuildWidgets {
                     height: 2,
                   ),
                   buildTextFont(
-                      context, 17, FontWeight.w500, "(BARRA)54%", Colors.black)
+                      context, 17, FontWeight.w500, "32/100", Colors.black)
                 ],
               ),
             ),
