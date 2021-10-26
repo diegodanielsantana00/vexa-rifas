@@ -15,6 +15,12 @@ class RealTimeFireBase {
     return jsonDecode(response.body);
   }
 
+  Future<Map> getDataTrasations(String email) async {
+    http.Response response = await http.get(Uri.parse(
+        '$APIRealTime/todasTransacoes/${email.replaceAll(".", "").replaceAll("_", "").replaceAll("/", "").replaceAll("@", "").replaceAll("\\", "").replaceAll(" ", "")}.json'));
+    return jsonDecode(response.body);
+  }
+
   Future<Map> getDataUser(String email) async {
     http.Response response = await http.get(Uri.parse(
         '$APIRealTime/users/${email.replaceAll(".", "").replaceAll("_", "").replaceAll("/", "").replaceAll("@", "").replaceAll("\\", "").replaceAll(" ", "")}.json'));
@@ -104,20 +110,49 @@ class RealTimeFireBase {
     }
   }
 
-  buyCredit(String email, int credit) async {
+  buyCredit(String email, double creditSoma) async {
     dynamic soma;
     http.Response response = await http.get(Uri.parse(
         '$APIRealTime/users/${email.replaceAll(".", "").replaceAll("_", "").replaceAll("/", "").replaceAll("@", "").replaceAll("\\", "").replaceAll(" ", "")}.json'));
-    soma = jsonDecode(response.body)["creditos"] + credit;
+    soma = jsonDecode(response.body)["creditos"] + creditSoma;
     await http.patch(
         Uri.parse(
             '$APIRealTime/users/${email.replaceAll(".", "").replaceAll("_", "").replaceAll("/", "").replaceAll("@", "").replaceAll("\\", "").replaceAll(" ", "")}.json'),
         body: json.encode({
           "creditos": soma,
         }));
+    setTransation("UP", email, 0, 0, creditSoma);
   }
 
-  buyNumberRifaCredit(double credit, List numberBuy, context, dynamic idRifa) async {
+  setTransation(
+      String type, String email, dynamic numberBuy, int idRifa, double creditPay) async {
+    if (type == "UP") {
+      await http.post(
+        Uri.parse(
+            '$APIRealTime/todasTransacoes/${email.replaceAll(".", "").replaceAll("_", "").replaceAll("/", "").replaceAll("@", "").replaceAll("\\", "").replaceAll(" ", "")}.json'),
+        body: json.encode({
+          "email": email,
+          "dataTransacao": DateTime.now().toString(),
+          "valorTotalPago": creditPay,
+          "tipo": type,
+        }));
+    }else{
+      await http.post(
+        Uri.parse(
+            '$APIRealTime/todasTransacoes/${email.replaceAll(".", "").replaceAll("_", "").replaceAll("/", "").replaceAll("@", "").replaceAll("\\", "").replaceAll(" ", "")}.json'),
+        body: json.encode({
+          "codigoDaRifa": idRifa,
+          "email": email,
+          "dataTransacao": DateTime.now().toString(),
+          "numerosRifas": numberBuy.toString(),
+          "valorTotalPago": creditPay,
+          "tipo": type,
+        }));
+    }
+  }
+
+  buyNumberRifaCredit(
+      double credit, List numberBuy, context, dynamic idRifa) async {
     DataLocal().readData().then((data) async {
       List dadosLocal = json.decode(data!);
       dynamic email = dadosLocal[0]["Email"];
@@ -220,11 +255,14 @@ class RealTimeFireBase {
               }));
 
           for (var i = 0; i < numberBuy.length; i++) {
-            await http.patch(
+            http.patch(
                 Uri.parse(
                     '$APIRealTime/rifasPagas/${idRifa}produtoRifa/${numberBuy[i]}Rifa.json'),
                 body: json.encode({"email": email, "valorPago": credit}));
           }
+
+          setTransation("DONW", email, numberBuy, idRifa, credit);
+
           AlertsDialogValidate().sucessAlert(context, 'Números comprados!', 0,
               () {
             Utils().navigatorToNoReturn(context, ConfigScreen());
@@ -240,10 +278,12 @@ class RealTimeFireBase {
       }
     }).catchError((data) {
       print(data);
-      AlertsDialogValidate().erroAlert(context,
-          'Ocorreu algum erro, Tente novamente, se o erro retornar por favor reporte', 0, () {
-            Utils().navigatorToNoReturn(context, HomeScreen());
-          }, "Fechar", false);
+      AlertsDialogValidate().erroAlert(
+          context,
+          'Ocorreu algum erro, Tente novamente, se o erro retornar por favor reporte',
+          0, () {
+        Utils().navigatorToNoReturn(context, HomeScreen());
+      }, "Fechar", false);
     });
   }
 }

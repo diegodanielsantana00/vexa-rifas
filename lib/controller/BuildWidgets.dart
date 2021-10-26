@@ -174,7 +174,7 @@ class BuildWidgets {
                     height: getSize(context).width * 0.3,
                     width: getSize(context).width * 0.3,
                     child: Image.network(
-                      url,
+                      'https://picsum.photos/250?image=9',
                       height: getSize(context).width * 0.3,
                       width: getSize(context).width * 0.3,
                     ))),
@@ -189,7 +189,7 @@ class BuildWidgets {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 6,
+                    height: 10,
                   ),
                   buildTextFont(
                       context, 17, FontWeight.w500, name, Colors.black),
@@ -197,12 +197,12 @@ class BuildWidgets {
                     height: 6,
                   ),
                   buildTextFont(context, 12, FontWeight.w500,
-                      "Valor da rifa: R\$$priceRifas", Colors.black),
-                  SizedBox(
-                    height: 2,
-                  ),
-                  buildTextFont(
-                      context, 17, FontWeight.w500, "32/100", Colors.black)
+                      "Valor da rifa: ∆ ${Utils().moneyTransform(priceRifas)}", Colors.black),
+                  // SizedBox(
+                  //   height: 2,
+                  // ),
+                  // buildTextFont(
+                  //     context, 17, FontWeight.w500, "32/100", Colors.black)
                 ],
               ),
             ),

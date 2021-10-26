@@ -18,7 +18,6 @@ class ShopRifaScreen extends StatefulWidget {
   final double priceRifa;
   final int idRifas;
 
-
   ShopRifaScreen(this.nameRifa, this.countRifa, this.priceRifa, this.idRifas);
 
   @override
@@ -32,7 +31,6 @@ class _ShopRifaScreenState extends State<ShopRifaScreen> {
     controllerConsult = false;
     controllerConsultlist = [];
     calcRifaPrice = 0;
-
   }
 
   late double _priceRifa = widget.priceRifa;
@@ -81,13 +79,22 @@ class _ShopRifaScreenState extends State<ShopRifaScreen> {
               padding: EdgeInsets.all(8),
               child: BuildWidgets().buildButton(context, "Comprar", () {
                 if (calcRifaPrice == 0) {
-                  AlertsDialogValidate()
-                      .erroAlert(context, "Escolha algum número para comprar", 5, (){}, "Fechar", true);
+                  AlertsDialogValidate().erroAlert(
+                      context,
+                      "Escolha algum número para comprar",
+                      5,
+                      () {},
+                      "Fechar",
+                      true);
                 } else {
-                  AlertsDialogValidate()
-                      .infoAlert(context, "Confirme seu(s) número(s) abaixo", 'Número(s) ${listRifa.toString().replaceAll("[", "(").replaceAll("]", ")")} no valor total de $calcRifaPrice Créditos', (){
-                        Utils().navigatorToNoReturn(context, AwaitShopBuy(calcRifaPrice,listRifa,widget.idRifas));
-                      });
+                  AlertsDialogValidate().infoAlert(
+                      context,
+                      "Confirme seu(s) número(s) abaixo",
+                      'Número(s) ${listRifa.toString().replaceAll("[", "(").replaceAll("]", ")")} no valor total de $calcRifaPrice Créditos',
+                      () {
+                    Utils().navigatorToNoReturn(context,
+                        AwaitShopBuy(calcRifaPrice, listRifa, widget.idRifas));
+                  });
                 }
               }, false, 0.4, 0),
             )
@@ -111,8 +118,8 @@ class _ShopRifaScreenState extends State<ShopRifaScreen> {
             height: 15,
           ),
           Expanded(
-            child: futureBuilderController(widget.idRifas, widget, refresh, _priceRifa)
-          )
+              child: futureBuilderController(
+                  widget.idRifas, widget, refresh, _priceRifa))
         ],
       ),
     );
@@ -122,7 +129,8 @@ class _ShopRifaScreenState extends State<ShopRifaScreen> {
 Widget futureBuilderController(
     idRifa, dynamic widget, dynamic refresh, dynamic _priceRifa) {
   return FutureBuilder<List?>(
-    future: RealTimeFireBase().getRifasBuyForIDRifa(idRifa, controllerConsult, controllerConsultlist),
+    future: RealTimeFireBase()
+        .getRifasBuyForIDRifa(idRifa, controllerConsult, controllerConsultlist),
     builder: (BuildContext context, AsyncSnapshot<List?> snapshot) {
       List<Widget> children;
       if (snapshot.hasData) {
@@ -153,10 +161,22 @@ Widget futureBuilderController(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                        color: ShopRifasController()
-                            .colorController(refresh, i, listRifa, snapshot.data),
                         width: BuildWidgets().getSize(context).width * 0.2,
                         height: BuildWidgets().getSize(context).width * 0.1,
+                        decoration: BoxDecoration(
+                          color: ShopRifasController().colorController(
+                              refresh, i, listRifa, snapshot.data),
+                          borderRadius: BorderRadius.all(Radius.circular(60)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 4,
+                              blurRadius: 10,
+                              offset:
+                                  Offset(-1, 2), // changes position of shadow
+                            )
+                          ],
+                        ),
                         child: Center(
                           child: BuildWidgets().buildTextFont(
                               context, 15, FontWeight.w500, "$i", Colors.white),
@@ -174,10 +194,22 @@ Widget futureBuilderController(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                        color: ShopRifasController()
-                            .colorController(refresh, i1, listRifa, snapshot.data),
                         width: BuildWidgets().getSize(context).width * 0.2,
                         height: BuildWidgets().getSize(context).width * 0.1,
+                        decoration: BoxDecoration(
+                          color: ShopRifasController().colorController(
+                              refresh, i1, listRifa, snapshot.data),
+                          borderRadius: BorderRadius.all(Radius.circular(60)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 4,
+                              blurRadius: 10,
+                              offset:
+                                  Offset(-1, 2), // changes position of shadow
+                            )
+                          ],
+                        ),
                         child: Center(
                           child: BuildWidgets().buildTextFont(context, 15,
                               FontWeight.w500, "$i1", Colors.white),
@@ -195,10 +227,22 @@ Widget futureBuilderController(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                        color: ShopRifasController()
-                            .colorController(refresh, i2, listRifa, snapshot.data),
                         width: BuildWidgets().getSize(context).width * 0.2,
                         height: BuildWidgets().getSize(context).width * 0.1,
+                        decoration: BoxDecoration(
+                          color: ShopRifasController().colorController(
+                              refresh, i2, listRifa, snapshot.data),
+                          borderRadius: BorderRadius.all(Radius.circular(60)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 4,
+                              blurRadius: 10,
+                              offset:
+                                  Offset(-1, 2), // changes position of shadow
+                            )
+                          ],
+                        ),
                         child: Center(
                           child: BuildWidgets().buildTextFont(context, 15,
                               FontWeight.w500, "$i2", Colors.white),

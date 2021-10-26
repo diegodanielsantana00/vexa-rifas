@@ -6,6 +6,7 @@ import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
+import 'package:vexa_rifas/screens/HistoryBuy.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/LoginScreen.dart';
 
@@ -167,11 +168,13 @@ class _ConfigScreenState extends State<ConfigScreen> {
                         SizedBox(
                           height: 40,
                         ),
-                        BuildWidgets().buildTopicsConfig(
-                            context,
-                            "Minhas Compras",
-                            Icons.shop_2_outlined,
-                            Colors.black),
+                        GestureDetector(
+                          onTap: () async {
+                            Utils().navigatorToReturn(context, HistoryBuyOrder());
+                          },
+                          child: BuildWidgets().buildTopicsConfig(
+                            context, "Minhas compras", Icons.shop_2_outlined, Colors.black),
+                        ),
                         BuildWidgets().buildTopicsConfig(context,
                             "Config. de Conta", Icons.settings, Colors.black),
                         GestureDetector(
