@@ -70,9 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       0.7,
                       _emailController,
-                      Colors.transparent,5),
+                      Colors.transparent,5,false),
                   BuildWidgets().buildTextField("Senha", true, Icons.password,
-                      context, 0.7, _passwordController, Colors.transparent,5),
+                      context, 0.7, _passwordController, Colors.transparent,5,false),
                   BuildWidgets().buildButton(context, "Entrar", () async{
                     awaitValidation = true;
                     // ignore: invalid_use_of_protected_member

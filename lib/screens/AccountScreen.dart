@@ -5,7 +5,7 @@ import 'package:vexa_rifas/controller/DataLocal.dart';
 import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
-import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
+import 'package:vexa_rifas/screens/BuyCreditsScreen.dart';
 import 'package:vexa_rifas/screens/HistoryBuy.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/LoginScreen.dart';
@@ -14,14 +14,14 @@ List dadosLocal = [];
 dynamic credit = 1;
 int segundsController = 0;
 
-class ConfigScreen extends StatefulWidget {
-  const ConfigScreen({Key? key}) : super(key: key);
+class AccountScreen extends StatefulWidget {
+  const AccountScreen({Key? key}) : super(key: key);
 
   @override
-  _ConfigScreenState createState() => _ConfigScreenState();
+  _AccountScreenState createState() => _AccountScreenState();
 }
 
-class _ConfigScreenState extends State<ConfigScreen> {
+class _AccountScreenState extends State<AccountScreen> {
   void initState() {
     super.initState();
 
@@ -29,7 +29,9 @@ class _ConfigScreenState extends State<ConfigScreen> {
       dadosLocal = json.decode(data!);
     }).catchError((data) {
       AlertsDialogValidate().erroAlert(context,
-          'Ocorreu um erro, faça login novamente', 5, () {}, "Fechar", true);
+          'Ocorreu um erro, faça login novamente', 5, () {
+            Utils().navigatorToNoReturn(context, LoginScreen());
+          }, "Fechar", true);
     });
     setState(() {});
     // credit = RealTimeFireBase().getDataUser(dadosLocal[0]["Email"]);
@@ -60,7 +62,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Utils().navigatorToNoReturnNoAnimated(context, CreateRifaScreen());
+          Utils().navigatorToNoReturnNoAnimated(context, BuyCreditsScreen());
         },
         backgroundColor: Colors.white,
         child: Icon(

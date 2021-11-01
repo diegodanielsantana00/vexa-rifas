@@ -4,8 +4,8 @@ import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
-import 'package:vexa_rifas/screens/ConfigScreen.dart';
-import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
+import 'package:vexa_rifas/screens/AccountScreen.dart';
+import 'package:vexa_rifas/screens/BuyCreditsScreen.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 
 class RealTimeFireBase {
@@ -170,7 +170,7 @@ class RealTimeFireBase {
       if (controllerAprovation == false) {
         AlertsDialogValidate().erroAlert(context, 'Creditos insuficientes', 0,
             () {
-          Utils().navigatorToNoReturn(context, CreateRifaScreen());
+          Utils().navigatorToNoReturn(context, BuyCreditsScreen());
         }, "Comprar mais créditos", false);
       } else {
         List<int> rifasShopping = [];
@@ -265,7 +265,7 @@ class RealTimeFireBase {
 
           AlertsDialogValidate().sucessAlert(context, 'Números comprados!', 0,
               () {
-            Utils().navigatorToNoReturn(context, ConfigScreen());
+            Utils().navigatorToNoReturn(context, AccountScreen());
           }, false);
         } else {
           AlertsDialogValidate().erroAlert(

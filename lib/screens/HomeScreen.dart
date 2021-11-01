@@ -3,8 +3,8 @@ import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
-import 'package:vexa_rifas/screens/ConfigScreen.dart';
-import 'package:vexa_rifas/screens/CreateRifaScreen.dart';
+import 'package:vexa_rifas/screens/AccountScreen.dart';
+import 'package:vexa_rifas/screens/BuyCreditsScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Utils().navigatorToNoReturnNoAnimated(context, CreateRifaScreen());
+          Utils().navigatorToNoReturnNoAnimated(context, BuyCreditsScreen());
         },
         backgroundColor: Colors.white,
         child: Icon(
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
                 onPressed: () {
                   Utils()
-                      .navigatorToNoReturnNoAnimated(context, ConfigScreen());
+                      .navigatorToNoReturnNoAnimated(context, AccountScreen());
                 },
                 icon: Icon(
                   Icons.settings,
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       0.7,
                       _searchontroller,
                       Colors.transparent,
-                      2)
+                      2,false)
                 ],
               )),
           Expanded(

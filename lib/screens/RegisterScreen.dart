@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
 import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
@@ -26,6 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _numberController = TextEditingController();
   final _lastnameController = TextEditingController();
   final _firstnameController = TextEditingController();
+  var maskFormatter = new MaskTextInputFormatter(mask: '(##) # ####-####', filter: { "#": RegExp(r'[0-9]') });
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       0.7,
                       _numberController,
                       Colors.transparent,
-                      5),
+                      5,maskFormatter),
                   BuildWidgets().buildTextField(
                       "Email",
                       false,
@@ -105,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       0.7,
                       _emailController,
                       emailValidate(_emailController.text, context),
-                      5),
+                      5, false),
                   // emailValidate(_emailController.text, context),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

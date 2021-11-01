@@ -35,8 +35,10 @@ class BuildWidgets {
       double width,
       dynamic controller,
       dynamic colorBorder,
-      double verticalHeigth) {
-    return Container(
+      double verticalHeigth,
+      dynamic mask) {
+    if (mask == false){
+      return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalHeigth),
       width: getSize(context).width * width,
@@ -70,6 +72,43 @@ class BuildWidgets {
         controller: controller,
       ),
     );
+    }else{
+      return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalHeigth),
+      width: getSize(context).width * width,
+      decoration: BoxDecoration(
+        color: aplicativoCollor50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: colorBorder,
+        ),
+      ),
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        textCapitalization: TextCapitalization.none,
+        onChanged: (value) {
+          // ignore: invalid_use_of_protected_member
+          (context as Element).reassemble();
+        },
+        enableSuggestions: false,
+        autocorrect: false,
+        obscureText: obscure,
+        inputFormatters: [mask],
+        autofillHints: [AutofillHints.email],
+        cursorColor: aplicativoCollor,
+        decoration: InputDecoration(
+          icon: Icon(
+            icon,
+            color: aplicativoCollor,
+          ),
+          hintText: type,
+          border: InputBorder.none,
+        ),
+        controller: controller,
+      ),
+    );
+    }
   }
 
   Widget buildTextFieldNoIcon(
@@ -162,7 +201,7 @@ class BuildWidgets {
       child: GestureDetector(
         onTap: () {
           Utils().navigatorToReturn(
-              context, RifasScreen(name, priceRifas, countRifas, idRifa));
+              context, RifasScreen(name, priceRifas, countRifas, idRifa, url));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -173,8 +212,7 @@ class BuildWidgets {
                     color: Colors.grey[300],
                     height: getSize(context).width * 0.3,
                     width: getSize(context).width * 0.3,
-                    child: Image.network(
-                      'https://picsum.photos/250?image=9',
+                    child: Image(image: AssetImage('assets/png/rifasImages/' + url + '.png'),
                       height: getSize(context).width * 0.3,
                       width: getSize(context).width * 0.3,
                     ))),
@@ -302,7 +340,12 @@ class AlertsDialogValidate {
         // btnOkIcon: Icons.cancel,
         btnCancelColor: Colors.red[700],
         btnCancelText: bntText,
-        dismissOnTouchOutside: dismissOnTouchOutside1
+        dismissOnTouchOutside: dismissOnTouchOutside1,
+        onDissmissCallback: (type) {
+          
+        },
+
+
       )..show();
     }
   }
@@ -335,7 +378,10 @@ sucessAlert(dynamic context, String errorText, int autoHide, Function function, 
         btnOkIcon: Icons.check_circle_outline,
         btnOkColor: Colors.green[700],
         btnOkText: "Ok",
-        dismissOnTouchOutside: dismissOnTouchOutside1
+        dismissOnTouchOutside: dismissOnTouchOutside1,
+        onDissmissCallback: (type) {
+          
+        },
       )..show();
     }
   }

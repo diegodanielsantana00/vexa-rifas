@@ -77,8 +77,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
               SizedBox(
                 height: size.height * 0.06,
               ),
-              BuildWidgets().buildTextFont(context, 14, FontWeight.w500,
-                  "Renviar email em $timeSend s", Colors.white),
+              sendAwaitEmail(context,widget.idToken, refresh),
               SizedBox(
                 height: size.height * 0.06,
               ),
@@ -106,9 +105,31 @@ class _ValidationScreenState extends State<ValidationScreen> {
                      }
                     
                     
-                  }, awaitValidation,0.6,10),
+                  }, awaitValidation,0.8,10),
             ],
           ),
         ));
+  }
+}
+
+
+Widget sendAwaitEmail(context, dynamic idToken, dynamic refresh){
+  if (timeSend >= 2) {
+    return BuildWidgets().buildTextFont(context, 14, FontWeight.w500,
+                  "Renviar email em $timeSend s", Colors.white);
+  }else{
+    return GestureDetector(onTap: () async{
+      await RegisterController().verifyEmailFireBaseUser(idToken);
+      timeSend = 70;
+      for (var i = timeSend; i >= 1; i--) {
+      Timer(Duration(seconds: timeReference), () {
+          timeSend = i;
+        refresh();
+      });
+      timeReference++;
+      }
+      refresh();
+    },child: BuildWidgets().buildTextFont(context, 14, FontWeight.w500,
+                  "Clique aqui para renviar o email", Colors.white));
   }
 }

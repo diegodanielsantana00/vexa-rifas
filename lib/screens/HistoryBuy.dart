@@ -61,11 +61,24 @@ class _HistoryBuyOrderState extends State<HistoryBuyOrder> {
                     },
                   );
                 } else if (snapshot2.hasError) {
-                  return Icon(
-                    Icons.error_outline,
-                    color: Colors.red,
-                    size: 60,
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+
+                        Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                        size: 60,
+                      ),
+                        BuildWidgets().buildTextFont(context, 12, FontWeight.w700, 'Nenhuma registro encontrado', Colors.black)
+                      ],),
+                    ],
                   );
+
                 } else {
                   children = <Widget>[
                     SizedBox(

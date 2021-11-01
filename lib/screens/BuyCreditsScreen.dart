@@ -1,25 +1,24 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
-import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
-import 'package:vexa_rifas/screens/ConfigScreen.dart';
+import 'package:vexa_rifas/screens/AccountScreen.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
+import 'package:vexa_rifas/screens/SelectCreditsScreen.dart';
 
-class CreateRifaScreen extends StatefulWidget {
-  // const CreateRifaScreen({Key? key}) : super(key: key);
+class BuyCreditsScreen extends StatefulWidget {
+  // const BuyCreditsScreen({Key? key}) : super(key: key);
 
-  CreateRifaScreen();
+  BuyCreditsScreen();
 
   @override
-  _CreateRifaScreenState createState() => _CreateRifaScreenState();
+  _BuyCreditsScreenState createState() => _BuyCreditsScreenState();
 }
 
-class _CreateRifaScreenState extends State<CreateRifaScreen> {
+class _BuyCreditsScreenState extends State<BuyCreditsScreen> {
   bool awaitValidation = false;
 
   void initState() {
@@ -73,7 +72,7 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
             IconButton(
                 onPressed: () {
                   Utils()
-                      .navigatorToNoReturnNoAnimated(context, ConfigScreen());
+                      .navigatorToNoReturnNoAnimated(context, AccountScreen());
                 },
                 icon: Icon(
                   Icons.settings,
@@ -115,8 +114,6 @@ class _CreateRifaScreenState extends State<CreateRifaScreen> {
   }
 }
 
-
-
 Widget futureBuilderController(bool awaitValidation) {
   return FutureBuilder<String?>(
     future: DataLocal().readData(),
@@ -124,40 +121,52 @@ Widget futureBuilderController(bool awaitValidation) {
       List<Widget> children;
       if (snapshot.hasData) {
         return Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                SizedBox(
-                  height: BuildWidgets().getSize(context).height*0.07,
+            child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: BuildWidgets().getSize(context).height * 0.07,
+              ),
+              BuildWidgets().buildTextFont(context, 14, FontWeight.w600,
+                  "Escolha uma das opções de pagamento", Colors.black),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Utils().navigatorToReturn(
+                        context,
+                        SelectCreditsScreen(
+                            json.decode(snapshot.data!)[0]["Email"]));
+                  },
+                  child: Container(
+                    height: 100,
+                    width: BuildWidgets().getSize(context).width * 0.7,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 10,
+                          offset: Offset(1, 1), // changes position of shadow
+                        )
+                      ],
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: ExactAssetImage(
+                                  'assets/png/mercado-pago-logo.png'))),
+                    ),
+                  ),
                 ),
-                BuildWidgets().buildTextFont(context, 14, FontWeight.w600, "1 Real = 1 Crédito VEXA", Colors.black),
-                BuildWidgets().buildButton(context, "10 Créditos", (){
-                  RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 10);
-                }, awaitValidation, 0.6, 10),
-                BuildWidgets().buildButton(context, "20 Créditos", (){
-                  RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 20);
-                }, awaitValidation,0.6,10),
-                BuildWidgets().buildButton(context, "40 Créditos", (){
-                  RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 40);
-                }, awaitValidation,0.6,10),
-                BuildWidgets().buildButton(context, "80 Créditos", (){
-                  RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 80);
-                }, awaitValidation,0.6,10),
-                BuildWidgets().buildButton(context, "100 Créditos", (){
-                  RealTimeFireBase().buyCredit(json.decode(snapshot.data!)[0]["Email"], 100);
-                }, awaitValidation,0.6,10),
-                Container(
-                height: 100,
-                width: 150,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: AssetImage('assets/png/mercado-pago-logo.png'))),
-                          ),
-                          ],
-                        ),
-              ));
+              ),
+            ],
+          ),
+        ));
       } else if (snapshot.hasError) {
         return Icon(
           Icons.error_outline,

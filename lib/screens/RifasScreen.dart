@@ -11,7 +11,8 @@ class RifasScreen extends StatefulWidget {
   dynamic priceRifa;
   int countRifas;
   int idRifa;
-  RifasScreen(this.nameRifa, this.priceRifa, this.countRifas, this.idRifa);
+  String url;
+  RifasScreen(this.nameRifa, this.priceRifa, this.countRifas, this.idRifa, this.url);
   @override
   _RifasScreenState createState() => _RifasScreenState();
 }
@@ -62,14 +63,13 @@ class _RifasScreenState extends State<RifasScreen> {
               ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Container(
-                      color: Colors.green[300],
+                      color: Colors.transparent,
                       height: BuildWidgets().getSize(context).width * 0.5,
                       width: BuildWidgets().getSize(context).width * 0.9,
-                      child: Image.network(
-                        'https://picsum.photos/250?image=9',
-                        height: BuildWidgets().getSize(context).width * 0.5,
-                        width: BuildWidgets().getSize(context).width * 0.9,
-                      ))),
+                      child: Image(image: AssetImage('assets/png/rifasImages/' + widget.url + '.png'),
+                      height: BuildWidgets().getSize(context).width * 0.3,
+                      width: BuildWidgets().getSize(context).width * 0.3,
+                    ))),
             ],
           ),
           Expanded(
