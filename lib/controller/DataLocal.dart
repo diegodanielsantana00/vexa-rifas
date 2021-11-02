@@ -5,11 +5,12 @@ import 'dart:io';
 
 
 class DataLocal {
-  List addDadosList(String email, String token, dynamic dados, dynamic context, bool validationEmail) {
+  List addDadosList(String email, String token, dynamic dados, dynamic context, bool validationEmail, String name) {
     // ignore: invalid_use_of_protected_member
     (context as Element).reassemble();
     Map<String, dynamic> newDadosList = Map();
     newDadosList["Email"] = email;
+    newDadosList["Name"] = name;
     newDadosList["Token"] = token;
     newDadosList["ValidationEmail"] = validationEmail;
     dados = [];
@@ -32,6 +33,11 @@ class DataLocal {
 
   // ignore: unused_element
   Future<String?> readData() async {
+    final file = await getData();
+    return file.readAsString();
+  }
+
+  Future<String?> readDataImage() async {
     final file = await getData();
     return file.readAsString();
   }

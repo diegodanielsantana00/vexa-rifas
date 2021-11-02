@@ -6,6 +6,7 @@ import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/BuyCreditsScreen.dart';
+import 'package:vexa_rifas/screens/HelpScreen.dart';
 import 'package:vexa_rifas/screens/HistoryBuy.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/LoginScreen.dart';
@@ -28,10 +29,10 @@ class _AccountScreenState extends State<AccountScreen> {
     DataLocal().readData().then((data) async {
       dadosLocal = json.decode(data!);
     }).catchError((data) {
-      AlertsDialogValidate().erroAlert(context,
-          'Ocorreu um erro, faça login novamente', 5, () {
-            Utils().navigatorToNoReturn(context, LoginScreen());
-          }, "Fechar", true);
+      AlertsDialogValidate()
+          .erroAlert(context, 'Ocorreu um erro, faça login novamente', 5, () {
+        Utils().navigatorToNoReturn(context, LoginScreen());
+      }, "Fechar", true);
     });
     setState(() {});
     // credit = RealTimeFireBase().getDataUser(dadosLocal[0]["Email"]);
@@ -114,8 +115,8 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BuildWidgets().buildTextFont(context, 12, FontWeight.w500,
-                      "ICONE DE PERFIL", Colors.white),
+                  Icon(Icons.account_circle_rounded,
+                      color: Colors.white, size: 50)
                 ],
               )),
           Expanded(
@@ -172,21 +173,31 @@ class _AccountScreenState extends State<AccountScreen> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            Utils().navigatorToReturn(context, HistoryBuyOrder());
+                            Utils()
+                                .navigatorToReturn(context, HistoryBuyOrder());
                           },
-                          child: BuildWidgets().buildTopicsConfig(
-                            context, "Minhas compras", Icons.shop_2_outlined, Colors.black),
+                          child: Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(
+                              context,
+                              "Minhas compras",
+                              Icons.shop_2_outlined,
+                              Colors.black)),
                         ),
-                        BuildWidgets().buildTopicsConfig(context,
-                            "Config. de Conta", Icons.settings, Colors.black),
+                        Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context,
+                            "Config. de Conta", Icons.settings, Colors.black)),
+                        GestureDetector(
+                          onTap: (){
+                            Utils().navigatorToReturn(context, HelpScreen());
+                          },
+                          child: Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context, "Ajuda",Icons.info_outline_rounded, Colors.black)),
+                        ),
                         GestureDetector(
                           onTap: () async {
                             final file = await DataLocal().getData();
                             await file.delete();
                             Utils().navigatorToNoReturn(context, LoginScreen());
                           },
-                          child: BuildWidgets().buildTopicsConfig(
-                            context, "Sair da conta", Icons.logout, Colors.red),
+                          child: Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context,
+                              "Sair da conta", Icons.logout, Colors.red)),
                         ),
                       ],
                     )),
@@ -212,7 +223,7 @@ Widget futureBuilderController() {
             List<Widget> children;
             if (snapshot.hasData) {
               return BuildWidgets().buildTextFont(context, 28, FontWeight.w500,
-                  snapshot.data!["creditos"].toString(), Colors.white);
+                  "∆ ${snapshot.data!["creditos"].toString()}", Colors.white);
             } else if (snapshot.hasError) {
               return Icon(
                 Icons.error_outline,

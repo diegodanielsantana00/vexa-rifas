@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
-import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 
+// ignore: must_be_immutable
 class SelectCreditsScreen extends StatefulWidget {
   // const SelectCreditsScreen({ Key key }) : super(key: key);
   
@@ -46,7 +46,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
   Widget body(email) {
     return Column(
       children: [
-        userTile(),
+        userTile(email),
         moneyWidget(),
         keypadWidget(),
         button(email),
@@ -54,7 +54,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
     );
   }
 
-  Widget userTile() {
+  Widget userTile(email) {
 
     return ListTile(
       leading: Column(
@@ -64,7 +64,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
         ],
       ),
       title: BuildWidgets().buildTextFont(context, 13, FontWeight.w700,
-          "diegodanielsantana00@gmail.com", Colors.white),
+          email, Colors.white),
       subtitle: BuildWidgets().buildTextFont(
           context, 12, FontWeight.w700, "Mercado Pago", Colors.white),
       // trailing: IconButton(
@@ -184,8 +184,9 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
   Widget button(email) {
     return GestureDetector(
       onTap: (){
-        RealTimeFireBase()
-                    .buyCredit(email, double.parse(money));
+        // MercadoPago().getMercadoPago(email, double.parse(money));
+        // RealTimeFireBase()
+        //             .buyCredit(email, double.parse(money));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),

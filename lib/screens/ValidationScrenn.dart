@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
+import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
@@ -97,7 +98,8 @@ class _ValidationScreenState extends State<ValidationScreen> {
                       awaitValidation = false;
                       refresh();
                      } else {
-                       dadosLocal = DataLocal().addDadosList(boolEmailVerification["users"][0]["email"], widget.idToken, dadosLocal, context, true);
+                      dynamic dadosDataBase = await RealTimeFireBase().getDataUser(widget.email);
+                       dadosLocal = DataLocal().addDadosList(boolEmailVerification["users"][0]["email"], widget.idToken, dadosLocal, context, true, dadosDataBase["nome"]);
                        DataLocal().saveData(dadosLocal);
                        Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => HomeScreen()),

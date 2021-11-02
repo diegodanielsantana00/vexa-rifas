@@ -189,7 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             validationBD["idToken"],
                             dadosLocal,
                             context,
-                            false);
+                            false, "${_firstnameController.text} ${_lastnameController.text}");
                         DataLocal().saveData(dadosLocal);
                         await RegisterController()
                             .verifyEmailFireBaseUser(validationBD["idToken"]);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
+import 'package:vexa_rifas/controller/RealTimeFireBase.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/SingController.dart';
 import 'package:vexa_rifas/controller/Validate.dart';
@@ -93,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialPageRoute(builder: (context) => ValidationScreen(validationBD["idToken"], validationBD["email"])),
                             (Route<dynamic> route) => false);
                          } else {
-                           dadosLocal = DataLocal().addDadosList(validationBD["email"], validationBD["idToken"], dadosLocal, context, true);
+                           dynamic dadosDataBase = await RealTimeFireBase().getDataUser(_emailController.text);
+                           dadosLocal =DataLocal().addDadosList(validationBD["email"], validationBD["idToken"], dadosLocal, context, true, dadosDataBase["nome"]);
                            DataLocal().saveData(dadosLocal);
                            Utils().navigatorToNoReturn(context, HomeScreen());
                          }

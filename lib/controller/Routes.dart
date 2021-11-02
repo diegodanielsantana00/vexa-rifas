@@ -17,6 +17,8 @@ const verifyEmailLink = "https://identitytoolkit.googleapis.com/v1/accounts:send
 const confirmVerifyEmailLink = "https://identitytoolkit.googleapis.com/v1/accounts:update?key=$APIKey";
 const getUserlINK = "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=$APIKey";
 const resetPasswordLink = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=$APIKey";
+const publicKeyMercadoPago = "APP_USR-6a502659-7c12-4f03-a816-b760b10c3f98";
+const preferenceId = "621322987-be4d57cd-2335-4e72-b4b6-6e537984d58f";
 
 //MENSSAGER
 
