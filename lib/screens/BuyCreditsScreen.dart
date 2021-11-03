@@ -130,40 +130,9 @@ Widget futureBuilderController(bool awaitValidation) {
               ),
               BuildWidgets().buildTextFont(context, 14, FontWeight.w600,
                   "Escolha uma das opções de pagamento", Colors.black),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Utils().navigatorToReturn(
-                        context,
-                        SelectCreditsScreen(
-                            json.decode(snapshot.data!)[0]["Email"]));
-                  },
-                  child: Container(
-                    height: 100,
-                    width: BuildWidgets().getSize(context).width * 0.7,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 10,
-                          offset: Offset(1, 1), // changes position of shadow
-                        )
-                      ],
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: ExactAssetImage(
-                                  'assets/png/mercado-pago-logo.png'))),
-                    ),
-                  ),
-                ),
-              ),
+              optionsPayments(context, snapshot, "mercado-pago-logo", "Mercado Pago"),
+              optionsPayments(context, snapshot, "PayPal", "PayPal"),
+              optionsPayments(context, snapshot, "pix", "Pix"),
             ],
           ),
         ));
@@ -192,5 +161,39 @@ Widget futureBuilderController(bool awaitValidation) {
         ),
       );
     },
+  );
+}
+
+Widget optionsPayments(context, snapshot, String image, String type) {
+  return Padding(
+    padding: const EdgeInsets.all(15.0),
+    child: GestureDetector(
+      onTap: () {
+        Utils().navigatorToReturn(context,
+            SelectCreditsScreen(json.decode(snapshot.data!)[0]["Email"], type));
+      },
+      child: Container(
+        height: 100,
+        width: BuildWidgets().getSize(context).width * 0.7,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: Offset(1, 1), // changes position of shadow
+            )
+          ],
+        ),
+        child: Container(
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: ExactAssetImage('assets/png/$image.png'))),
+        ),
+      ),
+    ),
   );
 }

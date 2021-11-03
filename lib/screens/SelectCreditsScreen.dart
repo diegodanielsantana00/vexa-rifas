@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
+import 'package:vexa_rifas/controller/MercadoPagoController.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 
 // ignore: must_be_immutable
@@ -9,7 +10,8 @@ class SelectCreditsScreen extends StatefulWidget {
   // const SelectCreditsScreen({ Key key }) : super(key: key);
   
   String email;
-  SelectCreditsScreen(this.email);
+  String tipo;
+  SelectCreditsScreen(this.email, this.tipo);
 
   @override
   _SelectCreditsScreenState createState() => _SelectCreditsScreenState();
@@ -26,7 +28,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
     return Scaffold(
       appBar: appBar(),
       backgroundColor: aplicativoCollor,
-      body: body(widget.email),
+      body: body(widget.email, widget.tipo),
     );
   }
 
@@ -43,10 +45,10 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
     );
   }
 
-  Widget body(email) {
+  Widget body(email, tipo) {
     return Column(
       children: [
-        userTile(email),
+        userTile(email, tipo),
         moneyWidget(),
         keypadWidget(),
         button(email),
@@ -54,7 +56,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
     );
   }
 
-  Widget userTile(email) {
+  Widget userTile(email, tipo) {
 
     return ListTile(
       leading: Column(
@@ -66,7 +68,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
       title: BuildWidgets().buildTextFont(context, 13, FontWeight.w700,
           email, Colors.white),
       subtitle: BuildWidgets().buildTextFont(
-          context, 12, FontWeight.w700, "Mercado Pago", Colors.white),
+          context, 12, FontWeight.w700, tipo, Colors.white),
       // trailing: IconButton(
       //   icon: Icon(Icons.arrow_forward_ios,color: Colors.white, size: 18),
       //   onPressed: (){
@@ -184,7 +186,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
   Widget button(email) {
     return GestureDetector(
       onTap: (){
-        // MercadoPago().getMercadoPago(email, double.parse(money));
+        MercadoPago().getMercadoPago(email, double.parse(money));
         // RealTimeFireBase()
         //             .buyCredit(email, double.parse(money));
       },

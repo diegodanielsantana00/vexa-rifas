@@ -37,6 +37,8 @@ class _HelpScreenState extends State<HelpScreen> {
               children: [
                 topicsHelp(context, 'Email', Icons.mark_email_unread_outlined),
                 topicsHelp(context, 'WhatsApp', Icons.message_rounded),
+                topicsHelp(context, 'Instagram', Icons.message_rounded),
+                topicsHelp(context, 'Celular', Icons.message_rounded),
               ],
             ),
           ),
