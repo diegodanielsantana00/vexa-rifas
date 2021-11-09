@@ -35,10 +35,10 @@ class _HelpScreenState extends State<HelpScreen> {
           child: Center(
             child: Column(
               children: [
-                topicsHelp(context, 'Email', Icons.mark_email_unread_outlined),
-                topicsHelp(context, 'WhatsApp', Icons.message_rounded),
-                topicsHelp(context, 'Instagram', Icons.message_rounded),
-                topicsHelp(context, 'Celular', Icons.message_rounded),
+                // topicsHelp(context, 'Email', Icons.mark_email_unread_outlined, "https://bit.ly/3iJFWl1"),
+                topicsHelp(context, 'Telegram', Icons.message_rounded, "https://bit.ly/3m3fUeO"),
+                topicsHelp(context, 'Instagram', Icons.message_rounded, "https://bit.ly/3iJFWl1"),
+                // topicsHelp(context, 'Celular', Icons.message_rounded, "https://bit.ly/3iJFWl1"),
               ],
             ),
           ),
@@ -46,25 +46,30 @@ class _HelpScreenState extends State<HelpScreen> {
   }
 }
 
-Widget topicsHelp(context, String type, IconData? icon) {
-  return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        height: 50,
-        width: BuildWidgets().getSize(context).width * 0.7,
-        decoration: BoxDecoration(
-          color: aplicativoCollor,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: Center(
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(icon, color: Colors.white),
-            SizedBox(
-              width: 10,
-            ),
-            BuildWidgets().buildTextFont(
-                context, 15, FontWeight.w500, type, Colors.white),
-          ]),
-        ),
-      ));
+Widget topicsHelp(context, String type, IconData? icon, String url) {
+  return GestureDetector(
+    onTap: (){
+      Utils().launchInBrowser(url);
+    },
+    child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          height: 50,
+          width: BuildWidgets().getSize(context).width * 0.7,
+          decoration: BoxDecoration(
+            color: aplicativoCollor,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Center(
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Icon(icon, color: Colors.white),
+              SizedBox(
+                width: 10,
+              ),
+              BuildWidgets().buildTextFont(
+                  context, 15, FontWeight.w500, type, Colors.white),
+            ]),
+          ),
+        )),
+  );
 }

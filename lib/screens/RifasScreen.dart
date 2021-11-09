@@ -12,7 +12,8 @@ class RifasScreen extends StatefulWidget {
   int countRifas;
   int idRifa;
   String url;
-  RifasScreen(this.nameRifa, this.priceRifa, this.countRifas, this.idRifa, this.url);
+  String desc;
+  RifasScreen(this.nameRifa, this.priceRifa, this.countRifas, this.idRifa, this.url, this.desc);
   @override
   _RifasScreenState createState() => _RifasScreenState();
 }
@@ -69,17 +70,34 @@ class _RifasScreenState extends State<RifasScreen> {
                       child: Image(image: AssetImage('assets/png/rifasImages/' + widget.url + '.png'),
                       height: BuildWidgets().getSize(context).width * 0.3,
                       width: BuildWidgets().getSize(context).width * 0.3,
+                      errorBuilder: (BuildContext context, Object exception,
+                          StackTrace? stackTrace) {
+                        return Image(
+                          image: AssetImage(
+                            'assets/png/rifasImages/Error.png',
+                          ),
+                          
+                          height: BuildWidgets().getSize(context).width * 0.3,
+                          width: BuildWidgets().getSize(context).width * 0.3,
+                        );
+                      },
                     ))),
             ],
           ),
+          Divider(
+
+          ),
           Expanded(
-            child: Column(
-            children: [
-              buildDescrition(context, widget.nameRifa, "Produto da Rifa", 18),
-              buildDescrition(context, "R\$${Utils().moneyTransform(widget.priceRifa)}", "Valor da Rifa", 18),
-              buildDescrition(context, "A asopdnpaosdifn apsdoif naspodfin pasodifn pasodifnpasodif npasdoifn psaodifnapsodifnapsodifnapodifnaksdm;l ,zmxc;l aknvjnpoiuenvpwupwornpou npruo nepwourn pwoerunf [pkmadf", "Descrição", 14),
-            ],
-          ))
+            child: SingleChildScrollView(
+              child: Column(
+              children: [
+                buildDescrition(context, widget.nameRifa, "Produto da Rifa", 18),
+                buildDescrition(context, "R\$${Utils().moneyTransform(widget.priceRifa)}", "Valor da Rifa", 18),
+                buildDescrition(context, widget.desc, "Descrição", 14),
+                
+              ],
+                      ),
+            ))
         ],
       ),
     );
@@ -103,15 +121,21 @@ Widget buildDescrition(dynamic context,String body, String type, double fontSize
                       "$type:", Colors.black),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 20,
+              SizedBox(
+                    height: 5,
                   ),
-                  Expanded(child: BuildWidgets().buildTextFont(context, fontSizedDesc, FontWeight.w700,
-                      body, Colors.black),)
-                ],
+              Container(
+                width: BuildWidgets().getSize(context).height *0.5,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(child: BuildWidgets().buildTextFont(context, fontSizedDesc, FontWeight.w700,
+                        body, Colors.black),)
+                  ],
+                ),
               ),
             ],
           );

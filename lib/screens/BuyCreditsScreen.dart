@@ -131,8 +131,8 @@ Widget futureBuilderController(bool awaitValidation) {
               BuildWidgets().buildTextFont(context, 14, FontWeight.w600,
                   "Escolha uma das opções de pagamento", Colors.black),
               optionsPayments(context, snapshot, "mercado-pago-logo", "Mercado Pago"),
-              optionsPayments(context, snapshot, "PayPal", "PayPal"),
-              optionsPayments(context, snapshot, "pix", "Pix"),
+              // optionsPayments(context, snapshot, "PayPal", "PayPal"),
+              // optionsPayments(context, snapshot, "pix", "Pix"),
             ],
           ),
         ));

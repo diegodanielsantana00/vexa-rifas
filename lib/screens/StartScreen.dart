@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
@@ -21,21 +23,28 @@ class _StartScreenState extends State<StartScreen> {
     super.initState();
     dynamic screen = LoginScreen();
     // Se ja tem conta criada
-    DataLocal().readData().then((data) async{
+    DataLocal().readData().then((data) async {
       dynamic dados = json.decode(data!);
       if (dados[0]["ValidationEmail"] == false) {
-        
-      }else{
-        screen = HomeScreen(); // RESPONSAVEL PARA VERIFICAR LOGIN
+      } else {
+        try {
+          final result =
+              await InternetAddress.lookup('www.google.com');
+          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+            screen = HomeScreen();
+            Timer(Duration(seconds: 2), () {
+              Utils().navigatorToNoReturn(context, screen);
+            });
+          }
+        } on SocketException catch (_) {
+          AlertsDialogValidate()
+              .erroAlert(context, 'Por favor conecte-se a internet', 0, () {
+            Utils().navigatorToNoReturnNoAnimated(context, StartScreen());
+          }, "Tentar Novamente", false);
+        }
       }
-
     }).catchError((data) {
       // AlertsDialogValidate().erroAlert(context, 'Ocorreu um erro, faça login novamente');
-    });
-
-
-    Timer(Duration(seconds: 2), () {
-      Utils().navigatorToNoReturn(context, screen);
     });
   }
 

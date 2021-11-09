@@ -195,13 +195,13 @@ class BuildWidgets {
   }
 
   Widget buildRifasShop(dynamic context, String name, double priceRifas,
-      String url, int countRifas, int idRifa) {
+      String url, int countRifas, int idRifa, String desc) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 7.5, bottom: 7.5),
       child: GestureDetector(
         onTap: () {
           Utils().navigatorToReturn(
-              context, RifasScreen(name, priceRifas, countRifas, idRifa, url));
+              context, RifasScreen(name, priceRifas, countRifas, idRifa, url, desc));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

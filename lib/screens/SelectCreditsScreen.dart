@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pix_flutter/pix_flutter.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/MercadoPagoController.dart';
 import 'package:vexa_rifas/controller/Routes.dart';
@@ -21,9 +22,35 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
   List numberAsList = [];
 
   String money = '0';
+
+  PixFlutter pixFlutter = PixFlutter(
+      api: Api(
+          baseUrl: 'SEU_BASE_URL',
+          authUrl: 'SEU_AUTH_URL',
+          certificate: 'SEU_CODIGO_BASIC',
+          appKey: 'SEU_APP_KEY',
+          permissions: [], // Lista das permissoes, use PixPermissions,
+          isBancoDoBrasil: false // Use true se estiver usando API do BB,
+          // Se voce estiver usando um certificado P12, utilize desta forma:
+          // certificatePath:
+          // e inclua o destino pishara o arquivo ;)
+          ),
+
+      // Essas informações a seguir somente são necessárias se você deseja utilizar o QR Code Estático
+      payload: Payload(
+          pixKey: '81995076740',
+          /// Há um erro no API que impede o uso de descrição, ela não será inserida. Assim que o bug for consertado, o código voltará ao funcionamento completo.
+          description: 'DESCRIÇÃO_DA_COMPRA',
+          merchantName: 'MERCHANT_NAME',
+          merchantCity: 'CITY_NAME',
+          txid: 'TXID', // Até 25 caracteres para o QR Code estático
+          amount: '2'));
+
   
   @override
   Widget build(BuildContext context) {
+
+  
     
     return Scaffold(
       appBar: appBar(),
@@ -185,10 +212,13 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
 
   Widget button(email) {
     return GestureDetector(
-      onTap: (){
-        MercadoPago().getMercadoPago(email, double.parse(money));
-        // RealTimeFireBase()
-        //             .buyCredit(email, double.parse(money));
+      onTap: () async{
+
+      
+
+                    await pixFlutter.getQRCode();
+
+        // MercadoPago().getMercadoPago(email, double.parse(money), context);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),

@@ -164,7 +164,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 snapshot.data!["${index}produtoRifa"]["url"],
                                 snapshot.data!["${index}produtoRifa"]
                                     ["quantidadeRifas"],
-                                index)
+                                index,
+                                snapshot.data!["${index}produtoRifa"]
+                                    ["desc"])
                           ],
                         );
                       } else {

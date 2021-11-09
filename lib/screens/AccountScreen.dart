@@ -182,8 +182,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               Icons.shop_2_outlined,
                               Colors.black)),
                         ),
-                        Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context,
-                            "Config. de Conta", Icons.settings, Colors.black)),
+                        // Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context,
+                        //     "Config. de Conta", Icons.settings, Colors.black)),
                         GestureDetector(
                           onTap: (){
                             Utils().navigatorToReturn(context, HelpScreen());
