@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:vexa_rifas/controller/BuildWidgets.dart';
 import 'package:vexa_rifas/controller/DataLocal.dart';
@@ -27,24 +26,14 @@ class _StartScreenState extends State<StartScreen> {
       dynamic dados = json.decode(data!);
       if (dados[0]["ValidationEmail"] == false) {
       } else {
-        try {
-          final result =
-              await InternetAddress.lookup('www.google.com');
-          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-            screen = HomeScreen();
-            Timer(Duration(seconds: 2), () {
-              Utils().navigatorToNoReturn(context, screen);
-            });
-          }
-        } on SocketException catch (_) {
-          AlertsDialogValidate()
-              .erroAlert(context, 'Por favor conecte-se a internet', 0, () {
-            Utils().navigatorToNoReturnNoAnimated(context, StartScreen());
-          }, "Tentar Novamente", false);
-        }
+        screen = HomeScreen();
       }
     }).catchError((data) {
-      // AlertsDialogValidate().erroAlert(context, 'Ocorreu um erro, faça login novamente');
+      // AlertsDialogValidate().erroAlert(context, 'Ocorreu um erro, faça login novamente', 0, (){}, 'Fazer Login', false);
+    });
+
+    Timer(Duration(seconds: 2), () {
+      Utils().navigatorToNoReturn(context, screen);
     });
   }
 
