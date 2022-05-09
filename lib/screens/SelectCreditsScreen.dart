@@ -213,12 +213,7 @@ class _SelectCreditsScreenState extends State<SelectCreditsScreen> {
   Widget button(email) {
     return GestureDetector(
       onTap: () async{
-
-      
-
-                    await pixFlutter.getQRCode();
-
-        // MercadoPago().getMercadoPago(email, double.parse(money), context);
+        MercadoPago().getMercadoPago(email, double.parse(money), context);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),

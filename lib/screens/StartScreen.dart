@@ -7,6 +7,8 @@ import 'package:vexa_rifas/controller/Routes.dart';
 import 'package:vexa_rifas/controller/ultis.dart';
 import 'package:vexa_rifas/screens/HomeScreen.dart';
 import 'package:vexa_rifas/screens/LoginScreen.dart';
+import 'package:vexa_rifas/screens/OnBoardingScreen.dart';
+// import 'package:vexa_rifas/screens/OnBoardingScreen.dart';
 
 bool awaitValidation = false;
 
@@ -20,14 +22,24 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
   void initState() {
     super.initState();
-    dynamic screen = LoginScreen();
+    dynamic screen = OnBoardingPage();
     // Se ja tem conta criada
     DataLocal().readData().then((data) async {
       dynamic dados = json.decode(data!);
+
+
+      if (dados[0]["Left"] == false ) {
       if (dados[0]["ValidationEmail"] == false) {
-      } else {
+      } else if (dados[0]["ValidationEmail"] == true) {
         screen = HomeScreen();
       }
+      }else{
+        screen = LoginScreen();
+      }
+
+
+
+
     }).catchError((data) {
       // AlertsDialogValidate().erroAlert(context, 'Ocorreu um erro, faça login novamente', 0, (){}, 'Fazer Login', false);
     });

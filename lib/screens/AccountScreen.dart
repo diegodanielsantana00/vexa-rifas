@@ -176,28 +176,40 @@ class _AccountScreenState extends State<AccountScreen> {
                             Utils()
                                 .navigatorToReturn(context, HistoryBuyOrder());
                           },
-                          child: Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(
-                              context,
-                              "Minhas compras",
-                              Icons.shop_2_outlined,
-                              Colors.black)),
+                          child: Container(
+                              color: Colors.transparent,
+                              child: BuildWidgets().buildTopicsConfig(
+                                  context,
+                                  "Minhas compras",
+                                  Icons.shop_2_outlined,
+                                  Colors.black)),
                         ),
                         // Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context,
                         //     "Config. de Conta", Icons.settings, Colors.black)),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Utils().navigatorToReturn(context, HelpScreen());
                           },
-                          child: Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context, "Ajuda",Icons.info_outline_rounded, Colors.black)),
+                          child: Container(
+                              color: Colors.transparent,
+                              child: BuildWidgets().buildTopicsConfig(
+                                  context,
+                                  "Ajuda",
+                                  Icons.info_outline_rounded,
+                                  Colors.black)),
                         ),
                         GestureDetector(
                           onTap: () async {
                             final file = await DataLocal().getData();
                             await file.delete();
+                            dadosLocal = DataLocal().addDadosListLeft(dadosLocal, context);
+                            DataLocal().saveData(dadosLocal);
                             Utils().navigatorToNoReturn(context, LoginScreen());
                           },
-                          child: Container(color: Colors.transparent, child:BuildWidgets().buildTopicsConfig(context,
-                              "Sair da conta", Icons.logout, Colors.red)),
+                          child: Container(
+                              color: Colors.transparent,
+                              child: BuildWidgets().buildTopicsConfig(context,
+                                  "Sair da conta", Icons.logout, Colors.red)),
                         ),
                       ],
                     )),
